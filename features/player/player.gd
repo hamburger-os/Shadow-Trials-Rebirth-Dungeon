@@ -1,51 +1,63 @@
 extends CharacterBody3D
 
-# 导出变量，会显示在检查器中，方便调整
-@export var speed: float = 5.0
-@export var jump_velocity: float = 7.5
+# ===== 可在 Inspector 中调整的参数 =====
+@export var speed: float = 5.0                 # 水平移动速度
+@export var jump_velocity: float = 7.5         # 起跳时给予的向上速度
+@export var rotate_to_movement: bool = false   # 是否自动朝向移动方向
+@export var turn_speed: float = 10.0           # 朝向插值速度（越大转身越快）
 
-# 从项目设置中获取默认重力
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+# 摄像机吊臂（上面挂着 Camera3D，用来确定“前后左右”）
+@onready var spring_arm: SpringArm3D = $SpringArm3D
 
-func _physics_process(delta):
-    # 获取当前的 'velocity' 向量（CharacterBody3D 的内置属性）
-    var vel = velocity
+# 使用项目设置中的 3D 默认重力
+var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-    # 1. 应用重力
-    # 检查是否在地面上
+
+func _physics_process(delta: float) -> void:
+    # 当前速度，从 CharacterBody3D 自带的 velocity 拷贝一份出来修改
+    var vel: Vector3 = velocity
+
+    # 1. 重力：不在地面上时持续向下加速度
     if not is_on_floor():
         vel.y -= gravity * delta
 
-    # 2. 获取键盘输入（方向键，对应 ui_left/right/up/down）
-    # 这会返回一个 2D 向量，例如按上键是 (0, -1)，按左键是 (-1, 0)
-    var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+    # 2. 获取输入（键盘方向键 / 手柄左摇杆）
+    # Input.get_vector: x = right - left, y = down - up
+    var input_dir: Vector2 = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 
-    # 3. 计算 3D 移动方向
-    # 我们将 2D 输入的 x 和 y 映射到 3D 空间的 x 和 z
-    var direction = Vector3(input_dir.x, 0, input_dir.y).normalized()
+    # 3. 基于摄像机朝向计算“前/后/左/右”的 3D 方向
+    var forward: Vector3 = -spring_arm.global_transform.basis.z  # 摄像机朝向的前方
+    var right: Vector3 = spring_arm.global_transform.basis.x     # 摄像机右方
 
-    # 4. 跳跃逻辑 + 应用速度
-    if direction:
-        # 如果有输入，设置水平速度
+    # 忽略 Y 分量，只在 XZ 平面移动
+    forward.y = 0.0
+    right.y = 0.0
+    forward = forward.normalized()
+    right = right.normalized()
+
+    # Input.get_vector 的 y 向下为正，所以这里取反：
+    #   上键：input_dir.y = -1 → 向前
+    #   下键：input_dir.y =  1 → 向后
+    var direction: Vector3 = forward * -input_dir.y + right * input_dir.x
+
+    # 4. 根据输入设置水平速度；没有输入时做简单减速
+    if direction != Vector3.ZERO:
+        direction = direction.normalized()
         vel.x = direction.x * speed
         vel.z = direction.z * speed
 
-        # 额外加分：让角色转向移动方向
-        # 使用 atan2 (反正切) 计算 Y 轴的旋转角度
-        rotation.y = atan2(direction.x, direction.z)
-
+        # 可选：让角色缓慢转向当前移动方向
+        if rotate_to_movement:
+            var target_yaw: float = atan2(direction.x, direction.z)
+            rotation.y = lerp_angle(rotation.y, target_yaw, turn_speed * delta)
     else:
-        # 如果没有输入，慢慢停下（模拟摩擦力）
-        vel.x = move_toward(vel.x, 0, speed)
-        vel.z = move_toward(vel.z, 0, speed)
+        vel.x = move_toward(vel.x, 0.0, speed)
+        vel.z = move_toward(vel.z, 0.0, speed)
 
-    # 5. 跳跃：在地面上且按下 ui_accept（默认空格）
+    # 5. 跳跃：角色在地面上并按下 ui_accept（键盘默认空格 / 手柄默认 A / ✕）
     if is_on_floor() and Input.is_action_just_pressed("ui_accept"):
         vel.y = jump_velocity
 
-    # 6. 执行移动
-    # 将计算好的速度设置回 CharacterBody3D
-    set_velocity(vel)
-    # 调用 move_and_slide() 来实际移动并处理碰撞
+    # 6. 把计算好的速度写回并执行移动与碰撞
+    velocity = vel
     move_and_slide()
-    
