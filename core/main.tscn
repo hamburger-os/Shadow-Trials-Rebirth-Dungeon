@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://ceq7k5vymtoyf"]
+
+[ext_resource type="PackedScene" uid="uid://dqyuwotmb8s6h" path="res://features/player/player.tscn" id="1_f3sb7"]
+[ext_resource type="Texture2D" uid="uid://d0cts1j5wsm5k" path="res://assets/environments/Bricks075A_1K-JPG/Bricks075A_1K-JPG_Color.jpg" id="1_r77kf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3gdo0"]
+albedo_texture = ExtResource("1_r77kf")
+uv1_scale = Vector3(2, 2, 2)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_gv5m4"]
+material = SubResource("StandardMaterial3D_3gdo0")
+uv2_padding = 1.0
+size = Vector3(50, 1, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f3sb7"]
+size = Vector3(50, 1, 50)
+
+[node name="世界" type="Node3D"]
+
+[node name="地面" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="地面"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_gv5m4")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="地面"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_f3sb7")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.8660254, -0.3535534, 0.35355335, 0, 0.7071067, 0.7071068, -0.5, -0.61237246, 0.61237234, 0, 50, 0)
+shadow_enabled = true
+
+[node name="主角" parent="." instance=ExtResource("1_f3sb7")]
