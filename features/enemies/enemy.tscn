@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://dmnrjhqljhwoy"]
+
+[ext_resource type="Script" uid="uid://duj1jk6lb1w6g" path="res://features/enemies/enemy.gd" id="1_f0acv"]
+[ext_resource type="Script" uid="uid://0pbnqnx6v3xy" path="res://features/shared/resources/character_stats.gd" id="2_4ad74"]
+
+[sub_resource type="Resource" id="Resource_dkn5w"]
+script = ExtResource("2_4ad74")
+metadata/_custom_type_script = "uid://0pbnqnx6v3xy"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ad74"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dkn5w"]
+material = SubResource("StandardMaterial3D_4ad74")
+size = Vector3(0.5, 2, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m30ro"]
+size = Vector3(0.5, 2, 0.5)
+
+[node name="敌人" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_f0acv")
+stats = SubResource("Resource_dkn5w")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_dkn5w")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_m30ro")

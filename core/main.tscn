@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://ceq7k5vymtoyf"]
+[gd_scene load_steps=8 format=3 uid="uid://ceq7k5vymtoyf"]
 
 [ext_resource type="PackedScene" uid="uid://dqyuwotmb8s6h" path="res://features/player/player.tscn" id="1_f3sb7"]
 [ext_resource type="Texture2D" uid="uid://d0cts1j5wsm5k" path="res://assets/environments/Bricks075A_1K-JPG/Bricks075A_1K-JPG_Color.jpg" id="1_r77kf"]
+[ext_resource type="PackedScene" uid="uid://dmnrjhqljhwoy" path="res://features/enemies/enemy.tscn" id="3_3gdo0"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_r77kf"]
 vertices = PackedVector3Array(-24.75, 0.5, -24.75, -24.75, 0.5, 24.75, 24.75, 0.5, 24.75, 24.75, 0.5, -24.75)
@@ -28,9 +29,6 @@ size = Vector3(50, 1, 50)
 transform = Transform3D(0.8660254, -0.3535534, 0.35355335, 0, 0.7071067, 0.7071068, -0.5, -0.61237246, 0.61237234, 0, 50, 0)
 shadow_enabled = true
 
-[node name="主角" parent="." instance=ExtResource("1_f3sb7")]
-camera_path = NodePath("")
-
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_r77kf")
 
@@ -46,3 +44,8 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/地面"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_f3sb7")
+
+[node name="主角" parent="." instance=ExtResource("1_f3sb7")]
+
+[node name="敌人" parent="." instance=ExtResource("3_3gdo0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.8651466)

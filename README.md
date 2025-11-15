@@ -1,4 +1,38 @@
-# 俯视 ARPG 肉鸽项目学习与实践手册（Godot 4.5）
+# 暗影试炼：轮回地牢（Shadow Trials: Rebirth Dungeon）
+
+![游戏图标](icon.png)
+
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+![Engine](https://img.shields.io/badge/engine-Godot%204.5-blue.svg)
+![Language](https://img.shields.io/badge/language-GDScript-purple.svg)
+![Status](https://img.shields.io/badge/status-WIP-orange.svg)
+![Target](https://img.shields.io/badge/target-Steam%20PC-black.svg)
+
+俯视角暗黑风肉鸽 ARPG 学习与实践项目，目标是做成一款可以真正上线 Steam 的小体量精品：在随机生成的地牢中战斗、掉落与成长，每一次死亡都让你变得更强。
+
+---
+
+## 项目定位与目标
+
+- **中文游戏名**：暗影试炼：轮回地牢  
+- **英文游戏名**：Shadow Trials: Rebirth Dungeon  
+- **玩法标签**：顶视角 / ARPG / Roguelite / 暗黑风 / 单机  
+- **项目性质**：开源学习工程 + 最终可发行的完整游戏  
+- **开源协议**：MIT License（见下文「许可证」章节）
+
+本仓库不仅是个人/团队练习 Godot 4.5、ARPG 与肉鸽设计的系统案例，也会尽量按照正式商业项目的标准来设计架构、文档与内容生产流程，方便未来导出到 Steam 及其他平台。
+
+---
+
+## 开源说明
+
+- 本项目以 MIT 协议开源，任何人都可以在遵守协议的前提下学习、修改、分发和用于商业项目。  
+- 欢迎通过 Issue / PR 反馈问题、提出新想法或贡献代码与文档，具体约定参考根目录 `AGENTS.md`。  
+- 适用场景包括：个人技术练习、课程与直播示例、项目脚手架（二次创作时请保留许可证声明）。
+
+---
+
+## 俯视 ARPG 肉鸽项目学习与实践手册（Godot 4.5）
 
 本仓库用于系统学习与实现一个俯视视角的暗黑类（ARPG 风格）肉鸽游戏。目标是以模块化、数据驱动的方式搭建核心循环（移动 - 战斗 - 掉落 - 成长 - 关卡推进），并兼顾易扩展与可维护性。
 
@@ -28,34 +62,72 @@
 
 ```text
 /project_root
-|-- addons/                  # Godot 插件
-|-- assets/                  # 非代码资源（与引擎无关）
-|   |-- environments/        # 3D 环境与材质/模型
-|   |-- vfx/                 # 视觉特效素材
-|   `-- audio/               # 音频（music/sfx）
-|-- core/                    # 全局/引导逻辑
-|   |-- main.tscn            # 主入口（加载流程、菜单切换）
-|   |-- main.gd
-|   |-- globals.gd           # Autoload 单例（配置、工具、RNG）
-|   `-- scene_manager.gd     # 场景切换（Autoload）
-|-- data/                    # 数据资源（Resource/Tres/Tscn）
-|   |-- items/
-|   |   |-- bases/
-|   |   |-- affixes/
-|   |   `-- uniques/
-|   `-- skills/
-|-- features/                # 领域模块（解耦、互不直接依赖）
-|   |-- player/
-|   |-- enemies/
-|   |-- combat/
-|   |-- inventory/
-|   |-- procedural_generation/
-|   `-- ui/
-|-- docs/                    # 设计/规范/研究记录
-|-- tests/                   # 测试（如 GUT/WAT）
-|-- tools/                   # 导入器、批处理、脚本
-|-- project.godot            # Godot 项目文件
-`-- export_presets.cfg       # 导出配置（创建导出后生成）
+|
+|-- addons/                  # Godot 插件目录。存放从外部获取的插件。
+|
+|-- assets/                  # 原始、非代码资源目录（美术、音频的源文件，如 .blend, .psd, .wav）。
+|   |-- environments/        # 3D 环境模型、材质、纹理的源文件。
+|   |-- vfx/                 # 视觉特效的源文件（序列帧、噪声图等）。
+|   `-- audio/               # 音频源文件，可再细分为 music/ 和 sfx/。
+|
+|-- core/                    # 核心代码与全局逻辑目录。游戏的启动和基础框架。
+|   |-- main.tscn            # 游戏主入口场景，负责加载全局单例和过渡到主菜单。
+|   |-- main.gd              # main.tscn 的附加脚本。
+|   |-- globals.gd           # 全局单例（Autoload），用于存放全局配置、工具函数等。
+|   `-- scene_manager.gd     # 场景切换管理器（Autoload），处理场景加载和过渡。
+|
+|-- data/                    # 游戏数据资源目录（Godot Resource 定义，如 .tres, .res）。
+|   |
+|   |-- characters/          # 存放角色数据定义
+|   |   |-- player_classes/  # 玩家职业/角色定义
+|   |   |-- enemy_types/     # 敌人类型定义
+|   |   `-- npcs/            # NPC 定义
+|   |
+|   |-- items/               # 物品数据（基础定义、词缀、独特物品等）。
+|   |   |-- bases/           # 基础物品类型定义（如：剑、头盔）。
+|   |   |-- affixes/         # 词缀数据（如：“火焰的”、“迅捷的”）。
+|   |   `-- uniques/         # 独特/传奇物品的定义。
+|   |
+|   `-- skills/              # 技能数据。
+|
+|-- features/                # 功能模块目录（核心）。各模块高内聚、低耦合。
+|   |-- player/              # 玩家角色（控制器、状态机、场景等）。
+|   |-- enemies/             # 敌人相关（AI、种类定义、场景等）。
+|   |-- combat/              # 战斗系统（伤害计算、状态效果、弹道逻辑等）。
+|   |-- inventory/           # 库存系统。
+|   |-- procedural_generation/ # 程序化生成逻辑（地图、关卡等）。
+|   |
+|   |-- ui/                  # UI 模块
+|   |   |-- hud/             # 游戏主界面（HUD）。
+|   |   |-- main_menu/       # 主菜单界面。
+|   |   |-- settings/        # 设置界面。
+|   |   `-- components/      # 可复用的 UI 组件（如自定义按钮、血条、弹出窗口）。
+|   |
+|   `-- shared/              # 跨模块共享的通用组件或场景。
+|       |-- components/      # 可复用的节点组件（如：生命值组件、拾取范围）。
+|       |
+|       |-- resources/       # 存放共享的 Resource 定义脚本
+|       |
+|       `-- state_machine/   # 通用的状态机实现。
+|
+|-- localization/            # 本地化/多语言目录。存放翻译文件（如 .csv, .po）。
+|
+|-- shaders/                 # 着色器代码目录（.gdshader 文件）。
+|   |-- post_processing/     # 后处理效果着色器。
+|   |-- materials/           # 用于材质的着色器。
+|   `-- particles/           # 用于粒子系统的着色器。
+|
+|-- docs/                    # 文档目录（设计、规范、研究记录等）。
+|
+|-- tests/                   # 自动化测试目录（如 GUT, WAT 测试脚本）。
+|
+|-- tools/                   # 外部工具和脚本目录（如：资源导入器、批处理脚本）。
+|
+|-- .gitignore               # Git 版本控制忽略文件，务必包含 .godot/ 目录。
+|
+|-- project.godot            # Godot 项目主配置文件。
+|
+`-- export_presets.cfg       # 导出预设配置文件（创建导出模板后自动生成）。
 ```
 
 新增模块时优先放在 `features/<domain>/`，避免把领域逻辑堆在 `core/`。
@@ -145,7 +217,7 @@
 - HUD 内容：血量、资源（怒气/法力）、经验条、技能栏、Buff/状态图标、战斗浮动信息。
 - 交互提示：物品拾取提示（对准/自动/按键）、装备对比（提升为绿色、降低为红色）。
 - 工具提示：从 `data/` 中的资源动态拼装（例如范围、冷却、伤害标签、词缀效果）。
-- UI 组件建议集中在 `features/ui/components/`，便于复用和统一风格。
+- UI 组件集中在 `features/ui/components/`，便于复用和统一风格。
 
 ## 存档与配置
 
@@ -192,6 +264,15 @@
 - 建议采用语义化版本号：`major.minor.patch`。
 - 可在 `docs/changelog.md` 中维护简要更新日志（版本、日期、主要改动）。
 
+## 贡献指南
+
+- 提交代码前请阅读根目录 `AGENTS.md`，遵循其中的目录结构与代码风格约定。  
+- 建议工作流程：
+  - Fork 本仓库并创建特性分支（例如 `feat/combat-crit`）。  
+  - 在 Godot 4.5 中运行 `core/main.tscn`，确认主流程可用且新功能正常工作。  
+  - 提交 Pull Request 时简要说明改动内容、测试方式，以及相关截图或 GIF（如适用）。  
+- 欢迎贡献内容包括：玩法与数值实验、战斗与关卡系统、程序化生成、UI/UX、性能优化、文档与本地化等。
+
 ## 学习路线与里程碑（俯视 ARPG）
 
 建议按以下阶段推进，每一步都产出可运行的“小竖切”：
@@ -207,3 +288,24 @@
 
 每个阶段完成后，建议在 `docs/` 中记录设计决策与踩坑经验，方便回顾与复用。
 
+---
+
+## Steam 上架规划
+
+当你完成前文的大部分学习阶段和核心系统搭建后，可以将本项目视为接近可发行的雏形，再逐步推进以下与 Steam 相关的工作：
+
+- **目标平台**：优先支持 Windows PC（Steam），在条件允许时兼容 Steam Deck。  
+- **仓库角色**：本仓库作为 Steam 构建的“公开基线工程”，所有关键玩法与系统都会在这里实现和维护，不在仓库中提交具体的 Steam 应用 ID 等敏感配置。  
+- **导出与构建**：使用 Godot 4.5 的 Windows 导出预设（`export_presets.cfg`），在接近发售阶段通过脚本/CI（位于 `tools/` 目录）统一打包并产出 Steam 上传所需的可执行与资源文件。  
+- **Steam 特性预留**：后续将预留/接入成就、云存档、截图/富状态（Rich Presence）等功能，具体通过 Steamworks SDK（如 GodotSteam 或自定义 GDExtension）集成。  
+- **本地化策略**：利用 `localization/` 目录维护多语言文本，至少保证简体中文与英文完整可玩，其他语言视社区贡献和精力扩展。  
+- **发布节奏**：推荐在项目中后期建立 `release` 分支，用于与 Steam 正式版本对齐；`main` 分支保持教学与实验性的迭代，必要差异会在 `docs/` 中说明。
+
+在实际推进时，可以按“优先做出一局完整可玩流程 → 打磨核心循环 → 再补内容与美术 → 最后接入 Steam 特性和商业化包装”的顺序，减少返工成本。
+
+---
+
+## 许可证（License）
+
+本项目采用 MIT 协议开源，你可以在满足协议条款的前提下自由地使用、修改和分发本项目的代码与资源。  
+完整协议文本见根目录文件：`LICENSE`。
