@@ -7,6 +7,7 @@ extends CharacterBody3D
 @export var turn_speed: float = 10.0           # 朝向插值速度（越大转身越快）
 @export var click_ray_length: float = 1000.0   # 鼠标点击射线长度
 @export var ai_arrive_tolerance: float = 0.25  # AI 导航到达判定半径
+@export var click_effect_scene: PackedScene    # 点击地面时播放的特效
 
 # 摄像机吊臂（上面挂着 Camera3D，用来确定“前后左右”）
 @onready var spring_arm: SpringArm3D = $SpringArm3D
@@ -48,6 +49,28 @@ func _handle_mouse_click(screen_pos: Vector2) -> void:
 
     ai_target_position = result.position
     ai_has_target = true
+
+    _spawn_click_effect(ai_target_position)
+
+
+func _spawn_click_effect(world_position: Vector3) -> void:
+    if click_effect_scene == null:
+        return
+
+    var effect_instance := click_effect_scene.instantiate() as Node3D
+    if effect_instance == null:
+        return
+
+    var root := get_tree().current_scene
+    if root == null:
+        return
+
+    root.add_child(effect_instance)
+    effect_instance.global_position = world_position
+
+    var anim_player := effect_instance.get_node_or_null("AnimationPlayer") as AnimationPlayer
+    if anim_player:
+        anim_player.play(&"spawn_and_fade")
 
 
 func _physics_process(delta: float) -> void:
