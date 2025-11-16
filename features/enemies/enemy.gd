@@ -9,6 +9,10 @@ func _ready():
         push_error("character %s 没有分配 character_stats!" % name)
         return
 
+    # 确保每个敌人实例拥有独立的属性资源，而不是共享同一份 Resource
+    stats = stats.duplicate()
+    stats.current_health = stats.max_health
+
     # 订阅 "health_changed" 信号，但我们先不实现 UI
     # stats.health_changed.connect(_on_health_changed)
 
@@ -26,4 +30,3 @@ func take_damage(damage_amount: int):
 func die():
     print("%s 死亡!" % name)
     queue_free() # 节点自毁
-

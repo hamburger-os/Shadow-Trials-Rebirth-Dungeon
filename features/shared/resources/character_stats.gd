@@ -15,6 +15,7 @@ signal health_changed(current_health, max_health)
         emit_signal("health_changed", current_health, max_health)
 
 @export var attack_power: int = 10
+@export var attack_interval: float = 0.4
 
 # --- 运行时变量 ---
 var current_health: int:
@@ -27,4 +28,3 @@ var current_health: int:
 # 当这个资源被创建时，自动设置满血量
 func _init():
     current_health = max_health
-

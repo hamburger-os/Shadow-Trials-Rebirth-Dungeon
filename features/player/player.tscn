@@ -1,13 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://dqyuwotmb8s6h"]
+[gd_scene load_steps=8 format=3 uid="uid://dqyuwotmb8s6h"]
 
 [ext_resource type="Script" uid="uid://bqf5r5c0xpy5d" path="res://features/player/player.gd" id="1_4flbx"]
-[ext_resource type="PackedScene" uid="uid://clw8ev5yic0lo" path="res://features/player/click_effect.tscn" id="2_fcb3x"]
 [ext_resource type="Script" uid="uid://0pbnqnx6v3xy" path="res://features/shared/resources/character_stats.gd" id="3_emvbc"]
 
 [sub_resource type="Resource" id="Resource_i250s"]
 script = ExtResource("3_emvbc")
 max_health = 150
 attack_power = 20
+attack_interval = null
 metadata/_custom_type_script = "uid://0pbnqnx6v3xy"
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_sh265"]
@@ -21,47 +21,9 @@ size = Vector3(1, 2, 1)
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4flbx"]
 radius = 0.25
 
-[sub_resource type="Animation" id="Animation_6xbq4"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("VisualRoot/Hitbox/CollisionShape3D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_i250s"]
-resource_name = "attack"
-length = 0.6
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("VisualRoot/Hitbox/CollisionShape3D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_y2cyt"]
-_data = {
-&"RESET": SubResource("Animation_6xbq4"),
-&"attack": SubResource("Animation_i250s")
-}
-
 [node name="主角" type="CharacterBody3D"]
 collision_mask = 2
 script = ExtResource("1_4flbx")
-click_effect_scene = ExtResource("2_fcb3x")
 stats = SubResource("Resource_i250s")
 camera_path = NodePath("SpringArm3D/Camera3D")
 
@@ -78,7 +40,6 @@ collision_mask = 4
 [node name="CollisionShape3D" type="CollisionShape3D" parent="VisualRoot/Hitbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
 shape = SubResource("BoxShape3D_emvbc")
-disabled = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="VisualRoot/Hitbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
@@ -96,10 +57,5 @@ spring_length = 10.0
 projection = 1
 size = 10.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_y2cyt")
-}
-
 [connection signal="body_entered" from="VisualRoot/Hitbox" to="." method="_on_hitbox_body_entered"]
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="body_exited" from="VisualRoot/Hitbox" to="." method="_on_hitbox_body_exited"]
