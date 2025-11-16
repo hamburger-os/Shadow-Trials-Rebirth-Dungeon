@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cnr7pfbnbsyqx"
+path="res://.godot/imported/wall_corner_B_inside.obj-a3f195de2903e71e85e7f2dcb167e179.mesh"
+
+[deps]
+
+files=["res://.godot/imported/wall_corner_B_inside.obj-a3f195de2903e71e85e7f2dcb167e179.mesh"]
+
+source_file="res://assets/environments/KayKit_Medieval_Hexagon_Pack_1.0_FREE/Assets/obj/buildings/neutral/wall_corner_B_inside.obj"
+dest_files=["res://.godot/imported/wall_corner_B_inside.obj-a3f195de2903e71e85e7f2dcb167e179.mesh", "res://.godot/imported/wall_corner_B_inside.obj-a3f195de2903e71e85e7f2dcb167e179.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

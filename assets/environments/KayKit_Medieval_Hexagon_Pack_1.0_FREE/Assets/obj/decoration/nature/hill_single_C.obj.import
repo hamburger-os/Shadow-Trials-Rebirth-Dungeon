@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://15a6pod81b2f"
+path="res://.godot/imported/hill_single_C.obj-8e2fc7c3b8bb3ce5d6eef8420a1e04d1.mesh"
+
+[deps]
+
+files=["res://.godot/imported/hill_single_C.obj-8e2fc7c3b8bb3ce5d6eef8420a1e04d1.mesh"]
+
+source_file="res://assets/environments/KayKit_Medieval_Hexagon_Pack_1.0_FREE/Assets/obj/decoration/nature/hill_single_C.obj"
+dest_files=["res://.godot/imported/hill_single_C.obj-8e2fc7c3b8bb3ce5d6eef8420a1e04d1.mesh", "res://.godot/imported/hill_single_C.obj-8e2fc7c3b8bb3ce5d6eef8420a1e04d1.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

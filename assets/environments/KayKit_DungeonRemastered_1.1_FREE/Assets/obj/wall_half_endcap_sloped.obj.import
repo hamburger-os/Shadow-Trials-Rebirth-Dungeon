@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dc4q27qqlosqo"
+path="res://.godot/imported/wall_half_endcap_sloped.obj-f056dce8d251f5e6c923dcb2d4d6cfec.mesh"
+
+[deps]
+
+files=["res://.godot/imported/wall_half_endcap_sloped.obj-f056dce8d251f5e6c923dcb2d4d6cfec.mesh"]
+
+source_file="res://assets/environments/KayKit_DungeonRemastered_1.1_FREE/Assets/obj/wall_half_endcap_sloped.obj"
+dest_files=["res://.godot/imported/wall_half_endcap_sloped.obj-f056dce8d251f5e6c923dcb2d4d6cfec.mesh", "res://.godot/imported/wall_half_endcap_sloped.obj-f056dce8d251f5e6c923dcb2d4d6cfec.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
