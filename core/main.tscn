@@ -1,18 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://ceq7k5vymtoyf"]
+[gd_scene load_steps=5 format=3 uid="uid://ceq7k5vymtoyf"]
 
-[ext_resource type="Texture2D" uid="uid://c8h27temdyhko" path="res://assets/environments/Bricks075A_1K-JPG/Bricks075A_1K-JPG_Displacement.jpg" id="1_3gdo0"]
 [ext_resource type="PackedScene" uid="uid://dqyuwotmb8s6h" path="res://features/player/player.tscn" id="1_f3sb7"]
 [ext_resource type="PackedScene" uid="uid://dmnrjhqljhwoy" path="res://features/enemies/enemy.tscn" id="3_3gdo0"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3gdo0"]
-albedo_color = Color(0.25021347, 0.25021344, 0.25021344, 1)
-albedo_texture = ExtResource("1_3gdo0")
-uv1_scale = Vector3(2, 2, 2)
-uv1_triplanar = true
-uv1_world_triplanar = true
-
 [sub_resource type="BoxMesh" id="BoxMesh_gv5m4"]
-material = SubResource("StandardMaterial3D_3gdo0")
 uv2_padding = 1.0
 size = Vector3(50, 1, 50)
 

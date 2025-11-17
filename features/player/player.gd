@@ -8,13 +8,17 @@ extends CharacterBody3D
 @export var dash_speed: float = 15.0           # 冲刺时的水平速度
 @export var dash_duration: float = 0.2         # 冲刺持续时间（秒）
 @export var dash_cooldown: float = 0.5         # 冲刺冷却时间（秒）
+@export var anim_name_idle: StringName = "Idle_A"
+@export var anim_name_run: StringName = "Walking_A"
+@export var anim_name_dash: StringName = "Running_A"
 
 # 摄像机吊臂（上面挂着 Camera3D，用来确定“前后左右”）
 @onready var spring_arm: SpringArm3D = $SpringArm3D
 @export_node_path("Camera3D") var camera_path: NodePath
 @onready var camera: Camera3D = get_node_or_null(camera_path) as Camera3D
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var visual_root: Node3D = $VisualRoot
+@onready var anim_tree: AnimationTree = $AnimationTree
+var anim_state: AnimationNodeStateMachinePlayback
 
 # 使用项目设置中的 3D 默认重力
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -24,6 +28,11 @@ var dash_cooldown_remaining: float = 0.0
 
 var attack_cooldown_remaining: float = 0.0
 var overlapping_bodies: Array[Node3D] = []
+var _current_move_state: StringName = ""
+
+
+func _ready() -> void:
+	_setup_animation_tree()
 
 
 func _physics_process(delta: float) -> void:
@@ -113,6 +122,7 @@ func _physics_process(delta: float) -> void:
 
 	# 8. 把计算好的速度写回并执行移动与碰撞
 	velocity = vel
+	_update_move_animation(vel)
 	move_and_slide()
 
 
@@ -155,8 +165,6 @@ func _try_attack() -> void:
 
 	if dealt_damage:
 		attack_cooldown_remaining = max(interval, 0.05)
-		if animation_player:
-			animation_player.play(&"attack")
 
 
 func _update_facing(move_dir: Vector3, delta: float) -> void:
@@ -189,3 +197,57 @@ func _update_facing(move_dir: Vector3, delta: float) -> void:
 		var dir := move_dir.normalized()
 		var target_yaw_move: float = atan2(dir.x, dir.z)
 		visual_root.rotation.y = lerp_angle(visual_root.rotation.y, target_yaw_move, turn_speed * delta)
+
+
+func _setup_animation_tree() -> void:
+	if not anim_tree:
+		return
+
+	var state_machine := AnimationNodeStateMachine.new()
+
+	var idle_node := AnimationNodeAnimation.new()
+	idle_node.animation = anim_name_idle
+	state_machine.add_node("Idle", idle_node)
+
+	var run_node := AnimationNodeAnimation.new()
+	run_node.animation = anim_name_run
+	state_machine.add_node("Run", run_node)
+
+	if anim_name_dash != "":
+		var dash_node := AnimationNodeAnimation.new()
+		dash_node.animation = anim_name_dash
+		state_machine.add_node("Dash", dash_node)
+
+	anim_tree.tree_root = state_machine
+	anim_tree.active = true
+
+	anim_state = anim_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
+	if not anim_state:
+		return
+
+	_current_move_state = "Idle"
+	anim_state.start(_current_move_state)
+
+
+func _set_move_state(state: StringName) -> void:
+	if not anim_state:
+		return
+	if _current_move_state == state:
+		return
+
+	_current_move_state = state
+	anim_state.travel(state)
+
+
+func _update_move_animation(vel: Vector3) -> void:
+	if not anim_tree or not anim_state:
+		return
+
+	var horizontal_speed := Vector2(vel.x, vel.z).length()
+
+	if dash_time_remaining > 0.0 and anim_name_dash != "":
+		_set_move_state("Dash")
+	elif horizontal_speed > 0.1:
+		_set_move_state("Run")
+	else:
+		_set_move_state("Idle")
