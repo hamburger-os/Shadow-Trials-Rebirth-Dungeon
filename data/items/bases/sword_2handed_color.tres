@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=4 format=3 uid="uid://ds1j1uu0lu8xb"]
+
+[ext_resource type="Script" uid="uid://dyghlalx8eg7q" path="res://features/shared/resources/weapon_data.gd" id="1_gm340"]
+[ext_resource type="ArrayMesh" uid="uid://buohb0dpxr73d" path="res://assets/environments/KayKit_Adventurers_2.0_FREE/Assets/obj/sword_2handed_color.obj" id="2_mesh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_weapon"]
+size = Vector3(10, 10, 10)
+
+[resource]
+script = ExtResource("1_gm340")
+weapon_name = "sword_2handed_color"
+damage = 25.0
+attack_range = 2.5
+weapon_mesh = ExtResource("2_mesh")
+attack_animation_name = "Melee_1H_Attack_Slice_Diagonal"
+attack_animation_names = Array[StringName]([&"Melee_1H_Attack_Slice_Diagonal", &"Melee_1H_Attack_Stab"])
+hitbox_shape = SubResource("BoxShape3D_weapon")
+metadata/_custom_type_script = "uid://dyghlalx8eg7q"

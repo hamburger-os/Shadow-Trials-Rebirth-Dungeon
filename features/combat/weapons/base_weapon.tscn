@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://botaa6smopch2"]
+
+[ext_resource type="Script" uid="uid://d4m86ma8uquj0" path="res://features/combat/weapons/base_weapon.gd" id="1_weapon"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_default"]
+
+[node name="基础武器" type="Node3D"]
+script = ExtResource("1_weapon")
+
+[node name="Hitbox" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+shape = SubResource("BoxShape3D_default")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]

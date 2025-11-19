@@ -35,9 +35,6 @@ bones/12/rotation = Quaternion(7.300499e-09, -7.3388096e-09, -0.0266581, 0.99964
 bones/12/scale = Vector3(1.0000001, 1, 1)
 bones/13/rotation = Quaternion(-0.31929126, 0.30052418, -0.22734971, 0.8695116)
 bones/13/scale = Vector3(0.9999998, 0.99999994, 1.0000002)
-bones/14/position = Vector3(-1.541501e-08, 0.096125126, -0.057499975)
-bones/14/rotation = Quaternion(-9.53579e-10, -4.3147743e-09, 0.7071068, 0.7071067)
-bones/14/scale = Vector3(1, 1.0000001, 1.0000001)
 bones/15/position = Vector3(0.17094508, 0.1135872, 1.5994095e-08)
 bones/15/rotation = Quaternion(0.99371517, 0.08371457, 0.07350378, 0.0109185325)
 bones/15/scale = Vector3(0.99999994, 0.9999997, 1.0000008)
@@ -56,3 +53,13 @@ bones/21/rotation = Quaternion(-0.5590394, 0.11451276, -0.008627633, 0.82115)
 bones/21/scale = Vector3(0.99999976, 1.0000006, 0.9999992)
 bones/22/rotation = Quaternion(-8.934892e-05, 0.9202217, -0.3913977, 2.0290998e-05)
 bones/22/scale = Vector3(1.0000002, 0.9999979, 1.0000024)
+
+[node name="Barbarian_BoneHandr" type="BoneAttachment3D" parent="Rig_Medium/Skeleton3D" index="7"]
+transform = Transform3D(6.032802e-07, -0.1498942, -0.9887015, -0.9999988, 2.0861611e-07, 9.4160384e-08, -3.5968722e-07, 0.9887012, -0.14989486, -0.49106064, 0.64103, 0.106595434)
+bone_name = "handslot.r"
+bone_idx = 14
+
+[node name="Barbarian_BoneHandl" type="BoneAttachment3D" parent="Rig_Medium/Skeleton3D" index="8"]
+transform = Transform3D(3.8131046e-07, 0.26286283, 0.9648327, 0.9999987, 1.1920917e-07, 6.604046e-07, 4.673778e-07, 0.9648324, -0.26286322, 0.5077679, 0.6367053, -0.018521149)
+bone_name = "handslot.l"
+bone_idx = 8

@@ -4,13 +4,16 @@ extends CharacterBody3D
 @export var speed: float = 5.0                 # 水平移动速度
 @export var rotate_to_movement: bool = true    # 是否自动朝向移动方向
 @export var turn_speed: float = 10.0           # 朝向插值速度（越大转身越快）
-@export var stats: character_stats             # 玩家角色的属性数据卡
+@export var stats: CharacterStats             # 玩家角色的属性数据卡
 @export var dash_speed: float = 15.0           # 冲刺时的水平速度
 @export var dash_duration: float = 0.2         # 冲刺持续时间（秒）
 @export var dash_cooldown: float = 0.5         # 冲刺冷却时间（秒）
 @export var anim_name_idle: StringName = "Idle_A"
 @export var anim_name_run: StringName = "Walking_A"
 @export var anim_name_dash: StringName = "Running_A"
+@export var anim_name_attack: StringName = "Melee_1H_Attack_Slice_Diagonal"
+@export var weapon_scene: PackedScene
+@export var weapon_data: WeaponData
 
 # 摄像机吊臂（上面挂着 Camera3D，用来确定“前后左右”）
 @onready var spring_arm: SpringArm3D = $SpringArm3D
@@ -18,6 +21,7 @@ extends CharacterBody3D
 @onready var camera: Camera3D = get_node_or_null(camera_path) as Camera3D
 @onready var visual_root: Node3D = $VisualRoot
 @onready var anim_tree: AnimationTree = $AnimationTree
+@onready var anim_player: AnimationPlayer = $VisualRoot/Barbarian/AnimationPlayer
 var anim_state: AnimationNodeStateMachinePlayback
 
 # 使用项目设置中的 3D 默认重力
@@ -29,10 +33,15 @@ var dash_cooldown_remaining: float = 0.0
 var attack_cooldown_remaining: float = 0.0
 var overlapping_bodies: Array[Node3D] = []
 var _current_move_state: StringName = ""
+var attack_anim_time_remaining: float = 0.0
+var _attack_anim_index: int = 0
+var _attack_anim_node: AnimationNodeAnimation
 
 
 func _ready() -> void:
+	_update_attack_anim_from_weapon()
 	_setup_animation_tree()
+	_equip_weapon()
 
 
 func _physics_process(delta: float) -> void:
@@ -58,6 +67,16 @@ func _physics_process(delta: float) -> void:
 		attack_cooldown_remaining -= delta
 		if attack_cooldown_remaining < 0.0:
 			attack_cooldown_remaining = 0.0
+
+	if attack_anim_time_remaining > 0.0:
+		attack_anim_time_remaining -= delta
+		if attack_anim_time_remaining <= 0.0:
+			attack_anim_time_remaining = 0.0
+			# 攻击结束后清空当前状态字符串，
+			# 确保后续一次移动更新能强制刷新状态机。
+			_current_move_state = ""
+			# 立即根据当前速度恢复到 Idle / Run 动画
+			_update_move_animation(velocity)
 
 	# 2. 获取输入（键盘方向键 / 手柄左摇杆）
 	# 使用自定义 move_*
@@ -148,11 +167,16 @@ func _try_attack() -> void:
 
 	var damage: int = 20
 	var interval: float = 0.4
-	if stats:
+	if weapon_data:
+		damage = int(weapon_data.damage)
+		if weapon_data.attack_speed > 0.0:
+			interval = 1.0 / weapon_data.attack_speed
+	elif stats:
 		damage = stats.attack_power
 		interval = stats.attack_interval
 
 	var dealt_damage: bool = false
+	var origin: Vector3 = global_transform.origin
 	for i in range(overlapping_bodies.size()):
 		var body := overlapping_bodies[i]
 		if not is_instance_valid(body):
@@ -160,11 +184,20 @@ func _try_attack() -> void:
 		if not body.has_method("take_damage"):
 			continue
 
+		if weapon_data and weapon_data.attack_range > 0.0:
+			var to_body: Vector3 = body.global_transform.origin - origin
+			if to_body.length() > weapon_data.attack_range:
+				continue
+
 		body.call("take_damage", damage)
 		dealt_damage = true
 
 	if dealt_damage:
-		attack_cooldown_remaining = max(interval, 0.05)
+		var anim_duration := _play_attack_animation()
+		var cd: float = interval
+		if anim_duration > 0.0:
+			cd = anim_duration
+		attack_cooldown_remaining = max(cd, 0.05)
 
 
 func _update_facing(move_dir: Vector3, delta: float) -> void:
@@ -218,6 +251,11 @@ func _setup_animation_tree() -> void:
 		dash_node.animation = anim_name_dash
 		state_machine.add_node("Dash", dash_node)
 
+	# 攻击状态交给 AnimationTree 管理
+	_attack_anim_node = AnimationNodeAnimation.new()
+	_attack_anim_node.animation = anim_name_attack
+	state_machine.add_node("Attack", _attack_anim_node)
+
 	anim_tree.tree_root = state_machine
 	anim_tree.active = true
 
@@ -232,7 +270,8 @@ func _setup_animation_tree() -> void:
 func _set_move_state(state: StringName) -> void:
 	if not anim_state:
 		return
-	if _current_move_state == state:
+	# 允许攻击状态重复触发，以便每次攻击都能从头播放一段动画
+	if _current_move_state == state and state != "Attack":
 		return
 
 	_current_move_state = state
@@ -245,9 +284,97 @@ func _update_move_animation(vel: Vector3) -> void:
 
 	var horizontal_speed := Vector2(vel.x, vel.z).length()
 
-	if dash_time_remaining > 0.0 and anim_name_dash != "":
+	if attack_anim_time_remaining > 0.0:
+		# 攻击期间保持在 Attack 状态，不切换移动动画
+		return
+	elif dash_time_remaining > 0.0 and anim_name_dash != "":
 		_set_move_state("Dash")
 	elif horizontal_speed > 0.1:
 		_set_move_state("Run")
 	else:
 		_set_move_state("Idle")
+
+
+func _play_attack_animation() -> float:
+	if not anim_tree or not anim_state:
+		return 0.0
+
+	var next_anim: StringName = _get_next_attack_anim_name()
+	if next_anim == "":
+		return 0.0
+
+	var base_length: float = 0.8
+	if anim_player:
+		var anim: Animation = anim_player.get_animation(next_anim)
+		if anim:
+			base_length = anim.length
+
+	var attacks_per_second: float = 1.0
+	if weapon_data and weapon_data.attack_speed > 0.0:
+		attacks_per_second = weapon_data.attack_speed
+
+	var desired_duration: float = 1.0 / attacks_per_second
+
+	if _attack_anim_node:
+		_attack_anim_node.animation = next_anim
+		# 完全通过 AnimationTree 控制攻击动画速度：
+		# 1）开启自定义时间线；
+		# 2）让一整段动画被拉伸或压缩到 desired_duration。
+		_attack_anim_node.use_custom_timeline = true
+		_attack_anim_node.stretch_time_scale = true
+		_attack_anim_node.timeline_length = desired_duration
+
+	# 每次攻击都从头开始播放 Attack 状态，
+	# 确保挥砍 / 刺击动作可以按顺序反复循环。
+	_current_move_state = "Attack"
+	anim_state.start("Attack")
+
+	attack_anim_time_remaining = desired_duration
+	return desired_duration
+
+
+func _update_attack_anim_from_weapon() -> void:
+	if not weapon_data:
+		return
+
+	if weapon_data.attack_animation_names.size() > 0:
+		_attack_anim_index = 0
+		anim_name_attack = weapon_data.attack_animation_names[_attack_anim_index]
+	elif weapon_data.attack_animation_name != "":
+		anim_name_attack = weapon_data.attack_animation_name
+
+	_refresh_attack_node_from_anim_name()
+
+
+func _get_next_attack_anim_name() -> StringName:
+	if weapon_data and weapon_data.attack_animation_names.size() > 0:
+		if _attack_anim_index >= weapon_data.attack_animation_names.size():
+			_attack_anim_index = 0
+		var anim_name_local: StringName = weapon_data.attack_animation_names[_attack_anim_index]
+		_attack_anim_index += 1
+		return anim_name_local
+	return anim_name_attack
+
+
+func _refresh_attack_node_from_anim_name() -> void:
+	if _attack_anim_node:
+		_attack_anim_node.animation = anim_name_attack
+
+
+func _equip_weapon() -> void:
+	if not weapon_scene:
+		return
+
+	var weapon_instance := weapon_scene.instantiate()
+	if weapon_instance == null:
+		return
+
+	var attach_parent: Node3D = get_node_or_null("VisualRoot/Barbarian/Rig_Medium/Skeleton3D/Barbarian_BoneHandr") as Node3D
+	if attach_parent == null:
+		attach_parent = visual_root
+
+	attach_parent.add_child(weapon_instance)
+
+	if weapon_data and weapon_instance.has_method("_apply_weapon_data"):
+		weapon_instance.set("weapon_data", weapon_data)
+		weapon_instance.call("_apply_weapon_data")

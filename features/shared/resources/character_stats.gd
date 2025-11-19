@@ -1,6 +1,6 @@
 @tool # 这个 @tool 关键字能让它在 Godot 编辑器中实时显示数据
 extends Resource
-class_name character_stats
+class_name CharacterStats
 
 # 信号：当血量变化时发出（比如用于更新 UI 血条）
 signal health_changed(current_health, max_health)

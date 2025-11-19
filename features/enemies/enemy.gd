@@ -1,12 +1,12 @@
 extends CharacterBody3D
 
 # ===== 可在 Inspector 中调整的参数 =====
-@export var stats: character_stats             # 玩家角色的属性数据卡
+@export var stats: CharacterStats             # 玩家角色的属性数据卡
 
 func _ready():
     # 安全检查，确保我们没有忘记在编辑器里分配 Stats
     if not stats:
-        push_error("character %s 没有分配 character_stats!" % name)
+        push_error("character %s 没有分配 CharacterStats!" % name)
         return
 
     # 确保每个敌人实例拥有独立的属性资源，而不是共享同一份 Resource

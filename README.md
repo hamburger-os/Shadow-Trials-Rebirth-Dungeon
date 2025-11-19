@@ -40,25 +40,31 @@
 
 - **入口与场景**
   - `project.godot` 中 `run/main_scene` 指向 `core/main.tscn`。  
-  - `core/main.tscn` 是一个测试场景：包含地面、一个玩家角色和若干静态放置的敌人，用于验证移动、冲刺和自动攻击。
+  - `core/main.tscn` 是一个测试场景：包含地面、一个玩家角色（野蛮人模型）和若干静态放置的骷髅敌人，用于验证移动、冲刺、武器攻击和基础战斗循环。
 - **玩家（features/player）**
-  - `features/player/player.tscn`：`CharacterBody3D` + `SpringArm3D/Camera3D`，实现俯视相机跟随。  
+  - `features/player/player.tscn`：`CharacterBody3D` + `SpringArm3D/Camera3D`，挂载 KayKit Barbarian 角色和手部挂点（`BoneAttachment3D`），实现俯视相机跟随。  
   - `features/player/player.gd`：实现
     - 基于 `move_left/move_right/move_forward/move_back` 的相机相对移动；
     - `dash` 冲刺（带持续时间和冷却）；
-    - 通过 `Area3D` 近战范围检测的**自动攻击**（冷却由属性控制）；
-    - 自动朝向当前攻击目标或移动方向。
+    - 通过武器挂载的 `Area3D`（Hitbox）进行近战范围检测的**自动攻击**，伤害、攻速和攻击距离优先由 `WeaponData` 驱动（否则退回角色 `CharacterStats`）；
+    - 使用 `AnimationTree + AnimationNodeStateMachine` 管理 Idle/Run/Dash/Attack 状态，根据武器攻速自动调整攻击动画节奏；
+    - 自动朝向当前攻击目标（优先最近敌人），否则朝向移动方向。
 - **敌人（features/enemies）**
-  - `features/enemies/enemy.tscn`：简单的盒子敌人，挂载 `CharacterBody3D`。  
-  - `features/enemies/enemy.gd`：敌人持有一份 `character_stats`，实现
+  - `features/enemies/enemy.tscn`：`CharacterBody3D` 敌人，使用 KayKit Skeleton Minion 模型、胶囊体碰撞和基础攻击/待机动画库。  
+  - `features/enemies/enemy.gd`：敌人持有一份独立复制的 `CharacterStats`，实现
     - `take_damage(damage_amount)`：扣减生命值并打印调试信息；
     - 生命值小于等于 0 时调用 `die()`，并 `queue_free()` 自毁。
-- **共享属性资源（features/shared/resources）**
-  - `features/shared/resources/character_stats.gd`：声明 `Resource` `character_stats`，包含
+- **共享属性与武器资源（features/shared/resources, data, features/combat/weapons）**
+  - `features/shared/resources/character_stats.gd`：声明 `Resource` `CharacterStats`，包含
     - `max_health`、`attack_power`、`attack_interval`；
     - 运行时变量 `current_health`；
     - `health_changed` 信号（当前仅在敌人上预留，尚未接 UI）。
-  - 玩家与敌人的属性都通过该 Resource 配置，玩家的攻击间隔和伤害直接读取自 `stats`。
+  - 玩家与敌人的基础属性都通过该 Resource 配置，在没有武器数据时，玩家的攻击间隔和伤害直接读取自 `stats`。
+  - `features/shared/resources/weapon_data.gd`：声明 `Resource` `WeaponData`，包含
+    - 武器名称、伤害、攻速、攻击范围；
+    - 模型 Mesh、攻击动画名（单个或序列）、Hitbox 形状、命中音效等表现配置。
+  - `data/items/bases/sword_2handed_color.tres`：基于 KayKit 双手剑模型的基础武器数据（`WeaponData`），配置了伤害、攻击速度、攻击范围及两段近战攻击动画。
+  - `features/combat/weapons/base_weapon.tscn` + `base_weapon.gd`：通用近战武器场景，挂载 `WeaponData`，在玩家手部挂点实例化，自动应用武器 Mesh 与 Hitbox，并把 `Area3D` 命中事件转发给玩家脚本以复用攻击判定逻辑。
 - **输入映射与碰撞层（project.godot）**
   - 已在 `project.godot` 中配置：`move_*`、`dash`、`skill_1`、`skill_2`、`interact`、`open_inventory`、`open_map`、`pause` 等输入动作，其中当前脚本实际使用的是移动 + `dash`。  
   - 3D 物理层名称已配置前 4 层：`player` / `ground` / `enemy` / `player_hitbox`，并在 `core/main.tscn`、`player.tscn`、`enemy.tscn` 中实际使用。
@@ -66,9 +72,10 @@
 **尚未实现 / 仅有目录或设计的模块**
 
 - `core/main.gd`、`core/globals.gd`、`core/scene_manager.gd`：文档中作为目标架构存在，当前仓库中**尚未创建**，场景切换与全局配置也尚未抽象为 Autoload。  
-- `data/characters`、`data/items`、`data/skills`：当前为空目录，尚未有实际 `.tres` 数据资产。  
-- `features/combat/`、`features/inventory/`、`features/procedural_generation/`、`features/ui/`：仅创建了目录（部分目录甚至为空），README 中对这些模块的描述属于未来规划。  
-- `features/shared/components/`、`features/shared/state_machine/`：目前仅存在 `resources/character_stats.gd`，其余通用组件/状态机未实现。  
+- `data/characters`、`data/skills`：当前为空目录，尚未有实际 `.tres` 数据资产；`data/items` 目前仅有一个基础武器数据 `bases/sword_2handed_color.tres`，用于测试近战武器流程。  
+- `features/combat/`：目前仅实现 `weapons/base_weapon.tscn` + `base_weapon.gd` 作为近战武器挂载与命中转发，其余战斗子系统（弹道、状态效果、伤害公式抽象等）仍处于规划阶段。  
+- `features/inventory/`、`features/procedural_generation/`、`features/ui/`：仅创建了目录（部分目录甚至为空），README 中对这些模块的描述属于未来规划。  
+- `features/shared/components/`、`features/shared/state_machine/`：目前仅存在若干基础 Resource（如 `resources/character_stats.gd`、`resources/weapon_data.gd`），其余通用组件/状态机未实现。  
 - `docs/`、`tests/`、`tools/`：当前为空；README 中提到的 `docs/changelog.md`、打包脚本等还没有落地。  
 - `export_presets.cfg`：项目还未创建导出预设，该文件在仓库中不存在。  
 - 学习路线中第 3 阶段及之后的内容（完整战斗系统、掉落/背包、程序化关卡、存档与元进度、Steam 集成等）目前都还**没有对应的实现代码**。
@@ -145,6 +152,7 @@
 |   |-- player/              # 玩家角色（控制器、状态机、场景等）。
 |   |-- enemies/             # 敌人相关（AI、种类定义、场景等）。
 |   |-- combat/              # 战斗系统（伤害计算、状态效果、弹道逻辑等）。
+|   |   `-- weapons/         # 武器相关逻辑（近战、远程、投射物等）。
 |   |-- inventory/           # 库存系统。
 |   |-- procedural_generation/ # 程序化生成逻辑（地图、关卡等）。
 |   |
