@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://k36o3drb6xxg"]
+
+[ext_resource type="Script" uid="uid://c2swqp4l7j3d0" path="res://features/procedural_generation/wfc_dungeon_generator.gd" id="1"]
+[ext_resource type="Resource" path="res://features/procedural_generation/room_templates/dungeon_rule_set.tres" id="2"]
+
+[node name="WfcDungeonGenerator" type="Node3D"]
+script = ExtResource("1")
+rule_set = ExtResource("2")

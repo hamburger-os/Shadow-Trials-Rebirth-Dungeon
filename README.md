@@ -40,7 +40,9 @@
 
 - **入口与场景**
   - `project.godot` 中 `run/main_scene` 指向 `core/main.tscn`。  
-  - `core/main.tscn` 是一个测试场景：包含地面、一个玩家角色（野蛮人模型）和若干静态放置的骷髅敌人，用于验证移动、冲刺、武器攻击和基础战斗循环。
+  - `core/main.tscn` 是一个测试场景：包含程序化生成的地牢地面（WFC 版），一个玩家角色（野蛮人模型）和若干静态放置的骷髅敌人，用于验证移动、冲刺、武器攻击和基础战斗循环。
+  - `features/procedural_generation/wfc_dungeon_generator.tscn`：基于 KayKit Dungeon Remastered 素材的 WFC 网格生成器，暴露 `grid_width/grid_height`（格子数，默认 32×32 ≈ 128m）、`cell_size`、`seed` 等参数；生成后自动将 `主角` 与测试敌人对齐到首个可行走格子。
+  - `features/procedural_generation/room_templates/dungeon_rule_set.tres`：使用 4m 基准砖块的初始规则集（floor_large/rocks、wall/doorway/corner），供生成器选取地板和墙体变体。
 - **玩家（features/player）**
   - `features/player/player.tscn`：`CharacterBody3D` + `SpringArm3D/Camera3D`，挂载 KayKit Barbarian 角色和手部挂点（`BoneAttachment3D`），实现俯视相机跟随。  
   - `features/player/player.gd`：实现
@@ -294,8 +296,8 @@
 
 在「项目设置 -> 物理 -> 3D -> 层名称」中建议配置：
 
-1. player
-2. ground
+1. ground
+2. player
 3. enemy
 4. player_hitbox（玩家伤害盒/投射物）
 5. enemy_hitbox

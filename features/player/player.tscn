@@ -3105,7 +3105,8 @@ height = 2.6
 graph_offset = Vector2(76.70931, -32.032867)
 
 [node name="主角" type="CharacterBody3D"]
-collision_mask = 2
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_4flbx")
 stats = SubResource("Resource_i250s")
 weapon_scene = ExtResource("5_weapon")
@@ -3127,11 +3128,12 @@ shape = SubResource("CapsuleShape3D_4flbx")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="."]
 transform = Transform3D(0.70710677, -0.4055798, 0.579228, 0, 0.81915206, 0.57357645, -0.70710677, -0.4055798, 0.579228, 0, 0, 0)
-spring_length = 15.0
+collision_mask = 0
+spring_length = 20.0
 
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
 projection = 1
-size = 15.0
+size = 20.0
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../VisualRoot/Barbarian")

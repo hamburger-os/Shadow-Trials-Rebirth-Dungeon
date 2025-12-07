@@ -12,6 +12,8 @@ extends CharacterBody3D
 @export var anim_name_run: StringName = "Walking_A"
 @export var anim_name_dash: StringName = "Running_A"
 @export var anim_name_attack: StringName = "Melee_1H_Attack_Slice_Diagonal"
+@export var anim_name_die: StringName = "Death_A"
+@export var respawn_delay: float = 0.5
 @export var weapon_scene: PackedScene
 @export var weapon_data: WeaponData
 
@@ -36,15 +38,24 @@ var _current_move_state: StringName = ""
 var attack_anim_time_remaining: float = 0.0
 var _attack_anim_index: int = 0
 var _attack_anim_node: AnimationNodeAnimation
+var _is_dead: bool = false
+var _death_time_remaining: float = 0.0
 
 
 func _ready() -> void:
+	if stats:
+		stats = stats.duplicate(true)
+		stats.current_health = stats.max_health
 	_update_attack_anim_from_weapon()
 	_setup_animation_tree()
 	_equip_weapon()
 
 
 func _physics_process(delta: float) -> void:
+	if _is_dead:
+		_handle_death(delta)
+		return
+
 	# 当前速度，从 CharacterBody3D 自带的 velocity 拷贝一份出来修改
 	var vel: Vector3 = velocity
 
@@ -256,6 +267,10 @@ func _setup_animation_tree() -> void:
 	_attack_anim_node.animation = anim_name_attack
 	state_machine.add_node("Attack", _attack_anim_node)
 
+	var die_node := AnimationNodeAnimation.new()
+	die_node.animation = anim_name_die
+	state_machine.add_node("Die", die_node)
+
 	anim_tree.tree_root = state_machine
 	anim_tree.active = true
 
@@ -267,19 +282,21 @@ func _setup_animation_tree() -> void:
 	anim_state.start(_current_move_state)
 
 
-func _set_move_state(state: StringName) -> void:
+func _set_move_state(state: StringName, force_restart: bool = false) -> void:
 	if not anim_state:
 		return
 	# 允许攻击状态重复触发，以便每次攻击都能从头播放一段动画
-	if _current_move_state == state and state != "Attack":
+	if _current_move_state == state and state != "Attack" and not force_restart:
 		return
 
 	_current_move_state = state
-	anim_state.travel(state)
+	anim_state.start(state)
 
 
 func _update_move_animation(vel: Vector3) -> void:
 	if not anim_tree or not anim_state:
+		return
+	if _is_dead:
 		return
 
 	var horizontal_speed := Vector2(vel.x, vel.z).length()
@@ -302,12 +319,6 @@ func _play_attack_animation() -> float:
 	var next_anim: StringName = _get_next_attack_anim_name()
 	if next_anim == "":
 		return 0.0
-
-	var base_length: float = 0.8
-	if anim_player:
-		var anim: Animation = anim_player.get_animation(next_anim)
-		if anim:
-			base_length = anim.length
 
 	var attacks_per_second: float = 1.0
 	if weapon_data and weapon_data.attack_speed > 0.0:
@@ -359,6 +370,57 @@ func _get_next_attack_anim_name() -> StringName:
 func _refresh_attack_node_from_anim_name() -> void:
 	if _attack_anim_node:
 		_attack_anim_node.animation = anim_name_attack
+
+
+func take_damage(damage_amount: int) -> void:
+	if _is_dead:
+		return
+	if not stats:
+		return
+
+	stats.current_health -= damage_amount
+	print("主角受到 %s 点伤害，剩余 %s" % [damage_amount, stats.current_health])
+	if stats.current_health <= 0:
+		_on_death()
+
+
+func _handle_death(delta: float) -> void:
+	var vel: Vector3 = velocity
+	if not is_on_floor():
+		vel.y -= gravity * delta
+	else:
+		vel = Vector3.ZERO
+	velocity = vel
+	_set_move_state("Die")
+	move_and_slide()
+
+	if _death_time_remaining > 0.0:
+		_death_time_remaining -= delta
+		if _death_time_remaining <= 0.0:
+			get_tree().reload_current_scene()
+
+
+func _on_death() -> void:
+	if _is_dead:
+		return
+	_is_dead = true
+	dash_time_remaining = 0.0
+	dash_cooldown_remaining = 0.0
+	attack_cooldown_remaining = 9999.0
+	attack_anim_time_remaining = 0.0
+	overlapping_bodies.clear()
+	_current_move_state = ""
+	var death_anim_length := _get_anim_length(anim_name_die)
+	_death_time_remaining = death_anim_length + respawn_delay
+	_set_move_state("Die", true)
+
+
+func _get_anim_length(anim_name: StringName) -> float:
+	if anim_player and anim_player.has_animation(anim_name):
+		var anim := anim_player.get_animation(anim_name)
+		if anim:
+			return anim.length
+	return 0.0
 
 
 func _equip_weapon() -> void:

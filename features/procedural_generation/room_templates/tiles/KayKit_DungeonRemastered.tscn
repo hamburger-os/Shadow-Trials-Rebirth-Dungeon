@@ -1,0 +1,847 @@
+[gd_scene load_steps=212 format=3 uid="uid://c5f48tiflb7xq"]
+
+[ext_resource type="PackedScene" uid="uid://dt68xpej12cw1" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_blue.tscn" id="1_61xb0"]
+[ext_resource type="PackedScene" uid="uid://bqoqppu0753c2" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_brown.tscn" id="2_cb0ub"]
+[ext_resource type="PackedScene" uid="uid://c383hgakk7eob" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_green.tscn" id="3_sxi68"]
+[ext_resource type="PackedScene" uid="uid://4jjypy4x1sw3" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_patternA_blue.tscn" id="4_s41dr"]
+[ext_resource type="PackedScene" uid="uid://cbyy4isin6dex" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_patternA_brown.tscn" id="5_fpchb"]
+[ext_resource type="PackedScene" uid="uid://dmf3w3rrnolqd" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_patternA_green.tscn" id="6_ynvpp"]
+[ext_resource type="PackedScene" uid="uid://cett0xsidjrx0" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_patternA_red.tscn" id="7_wr3rf"]
+[ext_resource type="PackedScene" uid="uid://dstvfiavthgvq" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_patternA_white.tscn" id="8_v8lii"]
+[ext_resource type="PackedScene" uid="uid://d1fuh1r3rr7sv" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_patternA_yellow.tscn" id="9_1r5v7"]
+[ext_resource type="PackedScene" uid="uid://c8jonwje2o701" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_patternB_blue.tscn" id="10_726jh"]
+[ext_resource type="PackedScene" uid="uid://cy05t63bd72p5" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_patternB_brown.tscn" id="11_4r1ya"]
+[ext_resource type="PackedScene" uid="uid://dgrvgpngfrb3k" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_patternB_green.tscn" id="12_b5xra"]
+[ext_resource type="PackedScene" uid="uid://bymg5wx18ledo" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_patternB_red.tscn" id="13_1m4hi"]
+[ext_resource type="PackedScene" uid="uid://7cyh4k5ebx2y" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_patternB_white.tscn" id="14_ln6lj"]
+[ext_resource type="PackedScene" uid="uid://d1je0co3smeig" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_patternB_yellow.tscn" id="15_uajv2"]
+[ext_resource type="PackedScene" uid="uid://dxgxt6lqd11ex" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_patternC_blue.tscn" id="16_yj5hr"]
+[ext_resource type="PackedScene" uid="uid://lernfrup4ude" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_patternC_brown.tscn" id="17_gr42j"]
+[ext_resource type="PackedScene" uid="uid://bg4vc4u7kcsoj" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_patternC_green.tscn" id="18_8bi6r"]
+[ext_resource type="PackedScene" uid="uid://c2eaith8fbp6c" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_patternC_red.tscn" id="19_dvtij"]
+[ext_resource type="PackedScene" uid="uid://bo83m3fad1thv" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_patternC_white.tscn" id="20_mnd44"]
+[ext_resource type="PackedScene" uid="uid://6ksrqbfx6nv2" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_patternC_yellow.tscn" id="21_46esp"]
+[ext_resource type="PackedScene" uid="uid://bdccrodtphl2p" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_red.tscn" id="22_gvc0v"]
+[ext_resource type="PackedScene" uid="uid://b4i7d7j57rykh" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_shield_blue.tscn" id="23_yhbu2"]
+[ext_resource type="PackedScene" uid="uid://brcdcnd4fott0" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_shield_brown.tscn" id="24_m0bbh"]
+[ext_resource type="PackedScene" uid="uid://cia82m6vy5b28" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_shield_green.tscn" id="25_tc6qx"]
+[ext_resource type="PackedScene" uid="uid://dgklv6uadibyr" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_shield_red.tscn" id="26_ndnu6"]
+[ext_resource type="PackedScene" uid="uid://dxxlaqdu5sf2u" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_shield_white.tscn" id="27_pe2de"]
+[ext_resource type="PackedScene" uid="uid://dlrrdqn4y8le8" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_shield_yellow.tscn" id="28_polps"]
+[ext_resource type="PackedScene" uid="uid://dthxlcxam40bu" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_thin_blue.tscn" id="29_8vhkm"]
+[ext_resource type="PackedScene" uid="uid://bbn8pm0c2igg2" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_thin_brown.tscn" id="30_m48nk"]
+[ext_resource type="PackedScene" uid="uid://db51sch1cnmkg" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_thin_green.tscn" id="31_uendw"]
+[ext_resource type="PackedScene" uid="uid://bqxq76jmidrpi" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_thin_red.tscn" id="32_p46ps"]
+[ext_resource type="PackedScene" uid="uid://1py1kqcljx7c" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_thin_white.tscn" id="33_ai8te"]
+[ext_resource type="PackedScene" uid="uid://st5tq5x25g3d" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_thin_yellow.tscn" id="34_utys3"]
+[ext_resource type="PackedScene" uid="uid://ge4tdd37is4f" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_triple_blue.tscn" id="35_e1a8d"]
+[ext_resource type="PackedScene" uid="uid://qoiov6i763hp" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_triple_brown.tscn" id="36_twrsj"]
+[ext_resource type="PackedScene" uid="uid://rgmuwjgq6wsy" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_triple_green.tscn" id="37_twin8"]
+[ext_resource type="PackedScene" uid="uid://411alpgo875w" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_triple_red.tscn" id="38_lrkfc"]
+[ext_resource type="PackedScene" uid="uid://cnk508n0wdi18" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_triple_white.tscn" id="39_s5rhr"]
+[ext_resource type="PackedScene" uid="uid://qw6g3g0audf" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_triple_yellow.tscn" id="40_he1h6"]
+[ext_resource type="PackedScene" uid="uid://s1ox53t0nkwm" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_white.tscn" id="41_aw4jv"]
+[ext_resource type="PackedScene" uid="uid://b1pw6bcp2kltb" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/banner_yellow.tscn" id="42_v7j15"]
+[ext_resource type="PackedScene" uid="uid://fxyccf0ivfhb" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/barrel_large.tscn" id="43_1n8ar"]
+[ext_resource type="PackedScene" uid="uid://cnphbefbjjoi0" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/barrel_large_decorated.tscn" id="44_t2gfh"]
+[ext_resource type="PackedScene" uid="uid://dpuj3ywkmdd8m" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/barrel_small.tscn" id="45_2bk7e"]
+[ext_resource type="PackedScene" uid="uid://deetmmng08mwd" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/barrel_small_stack.tscn" id="46_pefx2"]
+[ext_resource type="PackedScene" uid="uid://bv3y3tahly7qs" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/barrier.tscn" id="47_51kou"]
+[ext_resource type="PackedScene" uid="uid://pp8pvj6lrw7m" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/barrier_column.tscn" id="48_fut6o"]
+[ext_resource type="PackedScene" uid="uid://cbpo12wddsu35" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/barrier_colum_half.tscn" id="49_v5icd"]
+[ext_resource type="PackedScene" uid="uid://epxa1d7kclac" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/barrier_corner.tscn" id="50_3r3r5"]
+[ext_resource type="PackedScene" uid="uid://wjeh4v46g68" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/barrier_half.tscn" id="51_q0620"]
+[ext_resource type="PackedScene" uid="uid://c2a5tksh0gjo1" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/bed_decorated.tscn" id="52_0dv7y"]
+[ext_resource type="PackedScene" uid="uid://cwojpnqqhwcw" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/bed_floor.tscn" id="53_7bo1m"]
+[ext_resource type="PackedScene" uid="uid://nlvn5ukhsevn" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/bed_frame.tscn" id="54_6bprp"]
+[ext_resource type="PackedScene" uid="uid://d1o2yt2ev122f" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/bottle_A_brown.tscn" id="55_76jsx"]
+[ext_resource type="PackedScene" uid="uid://dyvx7ysotlyj" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/bottle_A_green.tscn" id="56_myuxo"]
+[ext_resource type="PackedScene" uid="uid://ci0swpcvsovpb" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/bottle_A_labeled_brown.tscn" id="57_km7ux"]
+[ext_resource type="PackedScene" uid="uid://c3m45pcrk82di" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/bottle_A_labeled_green.tscn" id="58_j748k"]
+[ext_resource type="PackedScene" uid="uid://dawtgpyineca6" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/bottle_B_brown.tscn" id="59_0tr6o"]
+[ext_resource type="PackedScene" uid="uid://icyqe81fy2ck" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/bottle_B_green.tscn" id="60_r11ak"]
+[ext_resource type="PackedScene" uid="uid://bxjqn2816qrq6" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/bottle_C_brown.tscn" id="61_76hjv"]
+[ext_resource type="PackedScene" uid="uid://btw0sglehniq5" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/bottle_C_green.tscn" id="62_lm87h"]
+[ext_resource type="PackedScene" uid="uid://bkpgjjg3beqch" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/box_large.tscn" id="63_ras2a"]
+[ext_resource type="PackedScene" uid="uid://buxy7bqlwp35r" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/box_small.tscn" id="64_1m5i1"]
+[ext_resource type="PackedScene" uid="uid://cibsng0l3but6" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/box_small_decorated.tscn" id="65_xf5vl"]
+[ext_resource type="PackedScene" uid="uid://vx1jm1dgp37s" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/box_stacked.tscn" id="66_bel1e"]
+[ext_resource type="PackedScene" uid="uid://c6r10l8i24mwp" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/candle.tscn" id="67_kbj81"]
+[ext_resource type="PackedScene" uid="uid://3whjxg0b8kgw" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/candle_lit.tscn" id="68_wndfb"]
+[ext_resource type="PackedScene" uid="uid://bhh4n4dl5fylg" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/candle_melted.tscn" id="69_avv45"]
+[ext_resource type="PackedScene" uid="uid://biiquj268ystg" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/candle_thin.tscn" id="70_52poy"]
+[ext_resource type="PackedScene" uid="uid://nq1lgdtvau5d" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/candle_thin_lit.tscn" id="71_hw4ne"]
+[ext_resource type="PackedScene" uid="uid://bqu8sdxdxyteg" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/candle_triple.tscn" id="72_rbtiq"]
+[ext_resource type="PackedScene" uid="uid://corxvic126c28" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/ceiling_tile.tscn" id="73_aqgf8"]
+[ext_resource type="PackedScene" uid="uid://qvl2ibdyhu02" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/chair.tscn" id="74_dlmcj"]
+[ext_resource type="PackedScene" uid="uid://1gu8tp25uhhk" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/chest.tscn" id="75_epfkj"]
+[ext_resource type="PackedScene" uid="uid://batyrsfse2jfx" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/chest_gold.tscn" id="76_5hvx1"]
+[ext_resource type="PackedScene" uid="uid://dl2v8pueojcy0" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/coin.tscn" id="77_r20h4"]
+[ext_resource type="PackedScene" uid="uid://4p0v38rj673x" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/coin_stack_large.tscn" id="78_4iku6"]
+[ext_resource type="PackedScene" uid="uid://d0agh22h3esyd" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/coin_stack_medium.tscn" id="79_dqrbv"]
+[ext_resource type="PackedScene" uid="uid://b3osrf77r75nk" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/coin_stack_small.tscn" id="80_hf3x6"]
+[ext_resource type="PackedScene" uid="uid://dmcrtye7vamq0" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/column.tscn" id="81_y7vdr"]
+[ext_resource type="PackedScene" uid="uid://d4jixt2m6i04j" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/crates_stacked.tscn" id="82_d0nvi"]
+[ext_resource type="PackedScene" uid="uid://bpumj6xpli30l" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_dirt_large.tscn" id="83_cnhy0"]
+[ext_resource type="PackedScene" uid="uid://cfx7swfsfx7gv" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_dirt_large_rocky.tscn" id="84_01lkp"]
+[ext_resource type="PackedScene" uid="uid://qrcc86bfqqar" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_dirt_small_A.tscn" id="85_0jqu1"]
+[ext_resource type="PackedScene" uid="uid://dm41uskaoarqc" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_dirt_small_B.tscn" id="86_picer"]
+[ext_resource type="PackedScene" uid="uid://fqco5u2gsd1c" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_dirt_small_C.tscn" id="87_pfcvn"]
+[ext_resource type="PackedScene" uid="uid://doy807aig53cb" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_dirt_small_corner.tscn" id="88_tdl74"]
+[ext_resource type="PackedScene" uid="uid://b8tytkm2g4cwh" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_dirt_small_D.tscn" id="89_wigye"]
+[ext_resource type="PackedScene" uid="uid://ndwe1dojy8ap" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_dirt_small_weeds.tscn" id="90_15a13"]
+[ext_resource type="PackedScene" uid="uid://bmjq50msv1kci" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_foundation_allsides.tscn" id="91_n8vt1"]
+[ext_resource type="PackedScene" uid="uid://dekbja2vbd3d6" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_foundation_corner.tscn" id="92_8ul4j"]
+[ext_resource type="PackedScene" uid="uid://s3d3bmr6ra83" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_foundation_diagonal_corner.tscn" id="93_b10e0"]
+[ext_resource type="PackedScene" uid="uid://wt20gsndkb5v" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_foundation_front.tscn" id="94_q0cwa"]
+[ext_resource type="PackedScene" uid="uid://i887gxh1qmxx" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_foundation_front_and_back.tscn" id="95_cx623"]
+[ext_resource type="PackedScene" uid="uid://cxq6wlpt7a2ns" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_foundation_front_and_sides.tscn" id="96_ryev5"]
+[ext_resource type="PackedScene" uid="uid://sbainni1tsg" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_tile_big_grate.tscn" id="97_ohii0"]
+[ext_resource type="PackedScene" uid="uid://bb6cu385atw70" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_tile_big_grate_open.tscn" id="98_68h15"]
+[ext_resource type="PackedScene" uid="uid://bof1bht74jdmk" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_tile_big_spikes.tscn" id="99_ov5pb"]
+[ext_resource type="PackedScene" uid="uid://bcab8r1mqkeiy" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_tile_extralarge_grates.tscn" id="100_b3duv"]
+[ext_resource type="PackedScene" uid="uid://b6t0hvrxsgim" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_tile_extralarge_grates_open.tscn" id="101_fqins"]
+[ext_resource type="PackedScene" uid="uid://ydkgdqe0auny" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_tile_grate.tscn" id="102_svcrp"]
+[ext_resource type="PackedScene" uid="uid://b3r6gpdbfujoo" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_tile_grate_open.tscn" id="103_8fceh"]
+[ext_resource type="PackedScene" uid="uid://db64sq7h525pq" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_tile_large.tscn" id="104_7t06i"]
+[ext_resource type="PackedScene" uid="uid://bswnqt8t184tq" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_tile_large_rocks.tscn" id="105_t7k23"]
+[ext_resource type="PackedScene" uid="uid://7ul6x0mo55bu" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_tile_small.tscn" id="106_i0l7b"]
+[ext_resource type="PackedScene" uid="uid://uilvx7dhcfne" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_tile_small_broken_A.tscn" id="107_8kd0f"]
+[ext_resource type="PackedScene" uid="uid://3ql68xis1s2c" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_tile_small_broken_B.tscn" id="108_w3mgp"]
+[ext_resource type="PackedScene" uid="uid://bervaax1ugned" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_tile_small_corner.tscn" id="109_8qg50"]
+[ext_resource type="PackedScene" uid="uid://dnix0nvbaq2u6" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_tile_small_decorated.tscn" id="110_oiqg2"]
+[ext_resource type="PackedScene" uid="uid://cm7m43qxjqhq6" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_tile_small_weeds_A.tscn" id="111_idkw8"]
+[ext_resource type="PackedScene" uid="uid://cl22a3kqg06jj" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_tile_small_weeds_B.tscn" id="112_6hrxk"]
+[ext_resource type="PackedScene" uid="uid://c6ooek1206ipk" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_wood_large.tscn" id="113_1c3bl"]
+[ext_resource type="PackedScene" uid="uid://dh7apth148gar" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_wood_large_dark.tscn" id="114_x5nq0"]
+[ext_resource type="PackedScene" uid="uid://lam52bl6jwro" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_wood_small.tscn" id="115_6wjw8"]
+[ext_resource type="PackedScene" uid="uid://c5gwxorgv4gni" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_wood_small_dark.tscn" id="116_7el43"]
+[ext_resource type="PackedScene" uid="uid://d108e7lb5e6gg" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/keg.tscn" id="117_4664y"]
+[ext_resource type="PackedScene" uid="uid://dpdoqri3unje4" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/keg_decorated.tscn" id="118_fxuyn"]
+[ext_resource type="PackedScene" uid="uid://ckggfellmy6u4" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/key.tscn" id="119_weis4"]
+[ext_resource type="PackedScene" uid="uid://co2gj5mt3v627" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/keyring.tscn" id="120_1o8f5"]
+[ext_resource type="PackedScene" uid="uid://dgwhwrdom5tsg" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/keyring_hanging.tscn" id="121_emn7k"]
+[ext_resource type="PackedScene" uid="uid://c6mta76vn4q6d" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/pillar.tscn" id="122_lykup"]
+[ext_resource type="PackedScene" uid="uid://crsq2jc8d3ryk" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/pillar_decorated.tscn" id="123_7ot3x"]
+[ext_resource type="PackedScene" uid="uid://cbfqch5gyjpwm" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/plate.tscn" id="124_tlamx"]
+[ext_resource type="PackedScene" uid="uid://cq4ioqgch6i74" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/plate_food_A.tscn" id="125_kfylh"]
+[ext_resource type="PackedScene" uid="uid://djvdh70a8aray" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/plate_food_B.tscn" id="126_tx7es"]
+[ext_resource type="PackedScene" uid="uid://dt54htt5fh57l" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/plate_small.tscn" id="127_nxanu"]
+[ext_resource type="PackedScene" uid="uid://d4nwpngwqxach" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/plate_stack.tscn" id="128_fqajj"]
+[ext_resource type="PackedScene" uid="uid://cdso0wj01exjc" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/rubble_half.tscn" id="129_q1r0o"]
+[ext_resource type="PackedScene" uid="uid://dk3oggkrox78o" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/rubble_large.tscn" id="130_mmtq5"]
+[ext_resource type="PackedScene" uid="uid://cx7hxtxgaapun" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/shelf_large.tscn" id="131_0ab1p"]
+[ext_resource type="PackedScene" uid="uid://esftv2x0mmbr" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/shelf_small.tscn" id="132_dqq32"]
+[ext_resource type="PackedScene" uid="uid://d25x0h573wfk8" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/shelf_small_candles.tscn" id="133_5lpsh"]
+[ext_resource type="PackedScene" uid="uid://mb4emdfdgxt4" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/shelves.tscn" id="134_bhrxx"]
+[ext_resource type="PackedScene" uid="uid://c3bfqdktbg12" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/stairs.tscn" id="135_2tp8s"]
+[ext_resource type="PackedScene" uid="uid://dy6so8b6obeyy" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/stairs_long.tscn" id="136_jgcos"]
+[ext_resource type="PackedScene" uid="uid://dx6cccst0xorc" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/stairs_long_modular_center.tscn" id="137_4vmi4"]
+[ext_resource type="PackedScene" uid="uid://bec1a56eijumf" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/stairs_long_modular_left.tscn" id="138_547ku"]
+[ext_resource type="PackedScene" uid="uid://y84wafvoj4jo" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/stairs_long_modular_right.tscn" id="139_lyuyk"]
+[ext_resource type="PackedScene" uid="uid://d3emab2rd70cq" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/stairs_modular_center.tscn" id="140_vmne4"]
+[ext_resource type="PackedScene" uid="uid://curgcbl54klf8" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/stairs_modular_left.tscn" id="141_8omij"]
+[ext_resource type="PackedScene" uid="uid://deniqxs1sa12t" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/stairs_modular_right.tscn" id="142_c47aj"]
+[ext_resource type="PackedScene" uid="uid://bcpnojhtt3b3v" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/stairs_narrow.tscn" id="143_e05ho"]
+[ext_resource type="PackedScene" uid="uid://cp6qc45sraxjt" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/stairs_walled.tscn" id="144_26fhw"]
+[ext_resource type="PackedScene" uid="uid://b1htbi1ntnsgc" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/stairs_wall_left.tscn" id="145_t2n5s"]
+[ext_resource type="PackedScene" uid="uid://b0x2qy1o851rw" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/stairs_wall_right.tscn" id="146_orto2"]
+[ext_resource type="PackedScene" uid="uid://bst83kmvcidfg" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/stairs_wide.tscn" id="147_ax75n"]
+[ext_resource type="PackedScene" uid="uid://bhalvlvw5sobf" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/stairs_wood.tscn" id="148_5puav"]
+[ext_resource type="PackedScene" uid="uid://bwtwhjp6skx85" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/stairs_wood_decorated.tscn" id="149_cn73y"]
+[ext_resource type="PackedScene" uid="uid://b25wi77f308an" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/stool.tscn" id="150_r1fob"]
+[ext_resource type="PackedScene" uid="uid://ppm33kvf4qdb" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/sword_shield.tscn" id="151_pl26j"]
+[ext_resource type="PackedScene" uid="uid://cmhusvq38f3yj" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/sword_shield_broken.tscn" id="152_b5ouh"]
+[ext_resource type="PackedScene" uid="uid://br3311t1ybk6x" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/sword_shield_gold.tscn" id="153_bwk8a"]
+[ext_resource type="PackedScene" uid="uid://bpw06brbnwsp2" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/table_long.tscn" id="154_lce5u"]
+[ext_resource type="PackedScene" uid="uid://tfwkbvoj38sx" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/table_long_broken.tscn" id="155_u8o3m"]
+[ext_resource type="PackedScene" uid="uid://cw5afb8mojioh" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/table_long_decorated_A.tscn" id="156_eyacf"]
+[ext_resource type="PackedScene" uid="uid://q70iy1qtjv6d" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/table_long_decorated_C.tscn" id="157_rwlmx"]
+[ext_resource type="PackedScene" uid="uid://bmxfcsnkqvxvn" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/table_long_tablecloth.tscn" id="158_ogjil"]
+[ext_resource type="PackedScene" uid="uid://cntkdalfl820v" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/table_long_tablecloth_decorated_A.tscn" id="159_ee3tq"]
+[ext_resource type="PackedScene" uid="uid://cm5kl7a1xkui5" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/table_medium.tscn" id="160_25dxv"]
+[ext_resource type="PackedScene" uid="uid://0a4gvwvwpceu" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/table_medium_broken.tscn" id="161_amv7d"]
+[ext_resource type="PackedScene" uid="uid://bg4s5jtakl7yo" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/table_medium_decorated_A.tscn" id="162_jd5lq"]
+[ext_resource type="PackedScene" uid="uid://bpf6bj6mejsbp" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/table_medium_tablecloth.tscn" id="163_al2eo"]
+[ext_resource type="PackedScene" uid="uid://c7xt6nputqv5b" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/table_medium_tablecloth_decorated_B.tscn" id="164_dvju3"]
+[ext_resource type="PackedScene" uid="uid://bcypoipo26ctv" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/table_small.tscn" id="165_tiglo"]
+[ext_resource type="PackedScene" uid="uid://dw3c6b787244a" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/table_small_decorated_A.tscn" id="166_rytrc"]
+[ext_resource type="PackedScene" uid="uid://stxfh3tppp8l" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/table_small_decorated_B.tscn" id="167_0s0wr"]
+[ext_resource type="PackedScene" uid="uid://b5fpwh7v3ddii" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/torch.tscn" id="168_fdi00"]
+[ext_resource type="PackedScene" uid="uid://3i2hijolr56" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/torch_lit.tscn" id="169_j1uck"]
+[ext_resource type="PackedScene" uid="uid://dxjf8c5iw1awi" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/torch_mounted.tscn" id="170_ugmkj"]
+[ext_resource type="PackedScene" uid="uid://cjvi4gsk68l4i" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/trunk_large_A.tscn" id="171_u363t"]
+[ext_resource type="PackedScene" uid="uid://jnlqdbxbexsd" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/trunk_large_B.tscn" id="172_gmcg2"]
+[ext_resource type="PackedScene" uid="uid://c0o1cb6c6tsm5" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/trunk_large_C.tscn" id="173_liioh"]
+[ext_resource type="PackedScene" uid="uid://bs4gn86c47yvs" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/trunk_medium_A.tscn" id="174_ck683"]
+[ext_resource type="PackedScene" uid="uid://1md33t6w3h5m" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/trunk_medium_B.tscn" id="175_jxush"]
+[ext_resource type="PackedScene" uid="uid://dnyvfi63wj0m0" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/trunk_medium_C.tscn" id="176_g6p0w"]
+[ext_resource type="PackedScene" uid="uid://dv504fsh1dqn7" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/trunk_small_A.tscn" id="177_4vfuj"]
+[ext_resource type="PackedScene" uid="uid://h1diq6vqanlb" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/trunk_small_B.tscn" id="178_cgg4i"]
+[ext_resource type="PackedScene" uid="uid://70y3od4r56xo" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/trunk_small_C.tscn" id="179_mvhwe"]
+[ext_resource type="PackedScene" uid="uid://byvkk147aasmn" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall.tscn" id="180_bracp"]
+[ext_resource type="PackedScene" uid="uid://bbviwdwl7peor" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_arched.tscn" id="181_qrjd3"]
+[ext_resource type="PackedScene" uid="uid://dxmnbqndxrg67" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_archedwindow_gated.tscn" id="182_7bmx0"]
+[ext_resource type="PackedScene" uid="uid://b2xkpc28gj7u1" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_archedwindow_gated_scaffold.tscn" id="183_e48qw"]
+[ext_resource type="PackedScene" uid="uid://bmkpoo2jpxlq2" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_archedwindow_open.tscn" id="184_crb2t"]
+[ext_resource type="PackedScene" uid="uid://crbqqlo6bji2k" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_broken.tscn" id="185_ea3gw"]
+[ext_resource type="PackedScene" uid="uid://da0imbkleoda0" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_corner.tscn" id="186_1wirm"]
+[ext_resource type="PackedScene" uid="uid://bmyq3uyxp2wja" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_corner_gated.tscn" id="187_chv8o"]
+[ext_resource type="PackedScene" uid="uid://bk8yoa4qv8asw" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_corner_scaffold.tscn" id="188_1eh50"]
+[ext_resource type="PackedScene" uid="uid://bxbimhm60ekmb" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_corner_small.tscn" id="189_b4033"]
+[ext_resource type="PackedScene" uid="uid://owlaib28a6b1" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_cracked.tscn" id="190_lnrb2"]
+[ext_resource type="PackedScene" uid="uid://dq2x4x7hytdvc" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_crossing.tscn" id="191_eb82n"]
+[ext_resource type="PackedScene" uid="uid://chme48v5v0pbb" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_doorway.tscn" id="192_o0t3h"]
+[ext_resource type="PackedScene" uid="uid://ce0ofhiu0lrbh" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_doorway_scaffold.tscn" id="193_4lsen"]
+[ext_resource type="PackedScene" uid="uid://b56r2yjlykf5" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_doorway_sides.tscn" id="194_35w1x"]
+[ext_resource type="PackedScene" uid="uid://bptljrggkgj7b" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_doorway_Tsplit.tscn" id="195_urlcj"]
+[ext_resource type="PackedScene" uid="uid://dtunqfua6msla" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_endcap.tscn" id="196_xuiff"]
+[ext_resource type="PackedScene" uid="uid://c2i4lgm4l8ixy" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_gated.tscn" id="197_ola84"]
+[ext_resource type="PackedScene" uid="uid://dk08n7wqiq8fr" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_half.tscn" id="198_i6tsp"]
+[ext_resource type="PackedScene" uid="uid://bxski61otvbp3" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_half_endcap.tscn" id="199_udkgp"]
+[ext_resource type="PackedScene" uid="uid://lp5eynpn2nh8" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_half_endcap_sloped.tscn" id="200_l5gll"]
+[ext_resource type="PackedScene" uid="uid://coowetfn6hs6a" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_open_scaffold.tscn" id="201_kjyn7"]
+[ext_resource type="PackedScene" uid="uid://ct127dfygbqar" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_pillar.tscn" id="202_sfsp0"]
+[ext_resource type="PackedScene" uid="uid://bkmj3fpbprphk" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_scaffold.tscn" id="203_x66x0"]
+[ext_resource type="PackedScene" uid="uid://crxj0k6xbtuhe" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_shelves.tscn" id="204_ah5lq"]
+[ext_resource type="PackedScene" uid="uid://ci5cr2ekdu56i" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_sloped.tscn" id="205_w435e"]
+[ext_resource type="PackedScene" uid="uid://4nbv4f3b0p6t" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_Tsplit.tscn" id="206_163v3"]
+[ext_resource type="PackedScene" uid="uid://dm4tixp4ximce" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_Tsplit_sloped.tscn" id="207_w4arn"]
+[ext_resource type="PackedScene" uid="uid://c2gshs1gmtxd2" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_window_closed.tscn" id="208_qcl5b"]
+[ext_resource type="PackedScene" uid="uid://c7d836tlt5abk" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_window_closed_scaffold.tscn" id="209_e22co"]
+[ext_resource type="PackedScene" uid="uid://dfj1deafpfi1l" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_window_open.tscn" id="210_18nk8"]
+[ext_resource type="PackedScene" uid="uid://b1vu1jgoc661v" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_window_open_scaffold.tscn" id="211_ywhcn"]
+
+[node name="KayKitDungeonRemastered" type="Node3D"]
+
+[node name="banner_blue" parent="." instance=ExtResource("1_61xb0")]
+
+[node name="banner_brown" parent="." instance=ExtResource("2_cb0ub")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 0)
+
+[node name="banner_green" parent="." instance=ExtResource("3_sxi68")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 0)
+
+[node name="banner_patternA_blue" parent="." instance=ExtResource("4_s41dr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 0)
+
+[node name="banner_patternA_brown" parent="." instance=ExtResource("5_fpchb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0, 0)
+
+[node name="banner_patternA_green" parent="." instance=ExtResource("6_ynvpp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 0)
+
+[node name="banner_patternA_red" parent="." instance=ExtResource("7_wr3rf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96, 0, 0)
+
+[node name="banner_patternA_white" parent="." instance=ExtResource("8_v8lii")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 112, 0, 0)
+
+[node name="banner_patternA_yellow" parent="." instance=ExtResource("9_1r5v7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 0)
+
+[node name="banner_patternB_blue" parent="." instance=ExtResource("10_726jh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 144, 0, 0)
+
+[node name="banner_patternB_brown" parent="." instance=ExtResource("11_4r1ya")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 0)
+
+[node name="banner_patternB_green" parent="." instance=ExtResource("12_b5xra")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 176, 0, 0)
+
+[node name="banner_patternB_red" parent="." instance=ExtResource("13_1m4hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 192, 0, 0)
+
+[node name="banner_patternB_white" parent="." instance=ExtResource("14_ln6lj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 208, 0, 0)
+
+[node name="banner_patternB_yellow" parent="." instance=ExtResource("15_uajv2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 224, 0, 0)
+
+[node name="banner_patternC_blue" parent="." instance=ExtResource("16_yj5hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16)
+
+[node name="banner_patternC_brown" parent="." instance=ExtResource("17_gr42j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 16)
+
+[node name="banner_patternC_green" parent="." instance=ExtResource("18_8bi6r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 16)
+
+[node name="banner_patternC_red" parent="." instance=ExtResource("19_dvtij")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 16)
+
+[node name="banner_patternC_white" parent="." instance=ExtResource("20_mnd44")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0, 16)
+
+[node name="banner_patternC_yellow" parent="." instance=ExtResource("21_46esp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 16)
+
+[node name="banner_red" parent="." instance=ExtResource("22_gvc0v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96, 0, 16)
+
+[node name="banner_shield_blue" parent="." instance=ExtResource("23_yhbu2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 112, 0, 16)
+
+[node name="banner_shield_brown" parent="." instance=ExtResource("24_m0bbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 16)
+
+[node name="banner_shield_green" parent="." instance=ExtResource("25_tc6qx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 144, 0, 16)
+
+[node name="banner_shield_red" parent="." instance=ExtResource("26_ndnu6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 16)
+
+[node name="banner_shield_white" parent="." instance=ExtResource("27_pe2de")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 176, 0, 16)
+
+[node name="banner_shield_yellow" parent="." instance=ExtResource("28_polps")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 192, 0, 16)
+
+[node name="banner_thin_blue" parent="." instance=ExtResource("29_8vhkm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 208, 0, 16)
+
+[node name="banner_thin_brown" parent="." instance=ExtResource("30_m48nk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 224, 0, 16)
+
+[node name="banner_thin_green" parent="." instance=ExtResource("31_uendw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 32)
+
+[node name="banner_thin_red" parent="." instance=ExtResource("32_p46ps")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 32)
+
+[node name="banner_thin_white" parent="." instance=ExtResource("33_ai8te")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 32)
+
+[node name="banner_thin_yellow" parent="." instance=ExtResource("34_utys3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 32)
+
+[node name="banner_triple_blue" parent="." instance=ExtResource("35_e1a8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0, 32)
+
+[node name="banner_triple_brown" parent="." instance=ExtResource("36_twrsj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 32)
+
+[node name="banner_triple_green" parent="." instance=ExtResource("37_twin8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96, 0, 32)
+
+[node name="banner_triple_red" parent="." instance=ExtResource("38_lrkfc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 112, 0, 32)
+
+[node name="banner_triple_white" parent="." instance=ExtResource("39_s5rhr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 32)
+
+[node name="banner_triple_yellow" parent="." instance=ExtResource("40_he1h6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 144, 0, 32)
+
+[node name="banner_white" parent="." instance=ExtResource("41_aw4jv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 32)
+
+[node name="banner_yellow" parent="." instance=ExtResource("42_v7j15")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 176, 0, 32)
+
+[node name="barrel_large" parent="." instance=ExtResource("43_1n8ar")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 192, 0, 32)
+
+[node name="barrel_large_decorated" parent="." instance=ExtResource("44_t2gfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 208, 0, 32)
+
+[node name="barrel_small" parent="." instance=ExtResource("45_2bk7e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 224, 0, 32)
+
+[node name="barrel_small_stack" parent="." instance=ExtResource("46_pefx2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 48)
+
+[node name="barrier" parent="." instance=ExtResource("47_51kou")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 48)
+
+[node name="barrier_column" parent="." instance=ExtResource("48_fut6o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 48)
+
+[node name="barrier_colum_half" parent="." instance=ExtResource("49_v5icd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 48)
+
+[node name="barrier_corner" parent="." instance=ExtResource("50_3r3r5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0, 48)
+
+[node name="barrier_half" parent="." instance=ExtResource("51_q0620")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 48)
+
+[node name="bed_decorated" parent="." instance=ExtResource("52_0dv7y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96, 0, 48)
+
+[node name="bed_floor" parent="." instance=ExtResource("53_7bo1m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 112, 0, 48)
+
+[node name="bed_frame" parent="." instance=ExtResource("54_6bprp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 48)
+
+[node name="bottle_A_brown" parent="." instance=ExtResource("55_76jsx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 144, 0, 48)
+
+[node name="bottle_A_green" parent="." instance=ExtResource("56_myuxo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 48)
+
+[node name="bottle_A_labeled_brown" parent="." instance=ExtResource("57_km7ux")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 176, 0, 48)
+
+[node name="bottle_A_labeled_green" parent="." instance=ExtResource("58_j748k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 192, 0, 48)
+
+[node name="bottle_B_brown" parent="." instance=ExtResource("59_0tr6o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 208, 0, 48)
+
+[node name="bottle_B_green" parent="." instance=ExtResource("60_r11ak")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 224, 0, 48)
+
+[node name="bottle_C_brown" parent="." instance=ExtResource("61_76hjv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 64)
+
+[node name="bottle_C_green" parent="." instance=ExtResource("62_lm87h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 64)
+
+[node name="box_large" parent="." instance=ExtResource("63_ras2a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 64)
+
+[node name="box_small" parent="." instance=ExtResource("64_1m5i1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 64)
+
+[node name="box_small_decorated" parent="." instance=ExtResource("65_xf5vl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0, 64)
+
+[node name="box_stacked" parent="." instance=ExtResource("66_bel1e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 64)
+
+[node name="candle" parent="." instance=ExtResource("67_kbj81")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96, 0, 64)
+
+[node name="candle_lit" parent="." instance=ExtResource("68_wndfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 112, 0, 64)
+
+[node name="candle_melted" parent="." instance=ExtResource("69_avv45")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 64)
+
+[node name="candle_thin" parent="." instance=ExtResource("70_52poy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 144, 0, 64)
+
+[node name="candle_thin_lit" parent="." instance=ExtResource("71_hw4ne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 64)
+
+[node name="candle_triple" parent="." instance=ExtResource("72_rbtiq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 176, 0, 64)
+
+[node name="ceiling_tile" parent="." instance=ExtResource("73_aqgf8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 192, 0, 64)
+
+[node name="chair" parent="." instance=ExtResource("74_dlmcj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 208, 0, 64)
+
+[node name="chest" parent="." instance=ExtResource("75_epfkj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 224, 0, 64)
+
+[node name="chest_gold" parent="." instance=ExtResource("76_5hvx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 80)
+
+[node name="coin" parent="." instance=ExtResource("77_r20h4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 80)
+
+[node name="coin_stack_large" parent="." instance=ExtResource("78_4iku6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 80)
+
+[node name="coin_stack_medium" parent="." instance=ExtResource("79_dqrbv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 80)
+
+[node name="coin_stack_small" parent="." instance=ExtResource("80_hf3x6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0, 80)
+
+[node name="column" parent="." instance=ExtResource("81_y7vdr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 80)
+
+[node name="crates_stacked" parent="." instance=ExtResource("82_d0nvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96, 0, 80)
+
+[node name="floor_dirt_large" parent="." instance=ExtResource("83_cnhy0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 112, 0, 80)
+
+[node name="floor_dirt_large_rocky" parent="." instance=ExtResource("84_01lkp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 80)
+
+[node name="floor_dirt_small_A" parent="." instance=ExtResource("85_0jqu1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 144, 0, 80)
+
+[node name="floor_dirt_small_B" parent="." instance=ExtResource("86_picer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 80)
+
+[node name="floor_dirt_small_C" parent="." instance=ExtResource("87_pfcvn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 176, 0, 80)
+
+[node name="floor_dirt_small_corner" parent="." instance=ExtResource("88_tdl74")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 192, 0, 80)
+
+[node name="floor_dirt_small_D" parent="." instance=ExtResource("89_wigye")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 208, 0, 80)
+
+[node name="floor_dirt_small_weeds" parent="." instance=ExtResource("90_15a13")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 224, 0, 80)
+
+[node name="floor_foundation_allsides" parent="." instance=ExtResource("91_n8vt1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 96)
+
+[node name="floor_foundation_corner" parent="." instance=ExtResource("92_8ul4j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 96)
+
+[node name="floor_foundation_diagonal_corner" parent="." instance=ExtResource("93_b10e0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 96)
+
+[node name="floor_foundation_front" parent="." instance=ExtResource("94_q0cwa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 96)
+
+[node name="floor_foundation_front_and_back" parent="." instance=ExtResource("95_cx623")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0, 96)
+
+[node name="floor_foundation_front_and_sides" parent="." instance=ExtResource("96_ryev5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 96)
+
+[node name="floor_tile_big_grate" parent="." instance=ExtResource("97_ohii0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96, 0, 96)
+
+[node name="floor_tile_big_grate_open" parent="." instance=ExtResource("98_68h15")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 112, 0, 96)
+
+[node name="floor_tile_big_spikes" parent="." instance=ExtResource("99_ov5pb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 96)
+
+[node name="floor_tile_extralarge_grates" parent="." instance=ExtResource("100_b3duv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 144, 0, 96)
+
+[node name="floor_tile_extralarge_grates_open" parent="." instance=ExtResource("101_fqins")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 96)
+
+[node name="floor_tile_grate" parent="." instance=ExtResource("102_svcrp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 176, 0, 96)
+
+[node name="floor_tile_grate_open" parent="." instance=ExtResource("103_8fceh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 192, 0, 96)
+
+[node name="floor_tile_large" parent="." instance=ExtResource("104_7t06i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 208, 0, 96)
+
+[node name="floor_tile_large_rocks" parent="." instance=ExtResource("105_t7k23")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 224, 0, 96)
+
+[node name="floor_tile_small" parent="." instance=ExtResource("106_i0l7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 112)
+
+[node name="floor_tile_small_broken_A" parent="." instance=ExtResource("107_8kd0f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 112)
+
+[node name="floor_tile_small_broken_B" parent="." instance=ExtResource("108_w3mgp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 112)
+
+[node name="floor_tile_small_corner" parent="." instance=ExtResource("109_8qg50")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 112)
+
+[node name="floor_tile_small_decorated" parent="." instance=ExtResource("110_oiqg2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0, 112)
+
+[node name="floor_tile_small_weeds_A" parent="." instance=ExtResource("111_idkw8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 112)
+
+[node name="floor_tile_small_weeds_B" parent="." instance=ExtResource("112_6hrxk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96, 0, 112)
+
+[node name="floor_wood_large" parent="." instance=ExtResource("113_1c3bl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 112, 0, 112)
+
+[node name="floor_wood_large_dark" parent="." instance=ExtResource("114_x5nq0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 112)
+
+[node name="floor_wood_small" parent="." instance=ExtResource("115_6wjw8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 144, 0, 112)
+
+[node name="floor_wood_small_dark" parent="." instance=ExtResource("116_7el43")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 112)
+
+[node name="keg" parent="." instance=ExtResource("117_4664y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 176, 0, 112)
+
+[node name="keg_decorated" parent="." instance=ExtResource("118_fxuyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 192, 0, 112)
+
+[node name="key" parent="." instance=ExtResource("119_weis4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 208, 0, 112)
+
+[node name="keyring" parent="." instance=ExtResource("120_1o8f5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 224, 0, 112)
+
+[node name="keyring_hanging" parent="." instance=ExtResource("121_emn7k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 128)
+
+[node name="pillar" parent="." instance=ExtResource("122_lykup")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 128)
+
+[node name="pillar_decorated" parent="." instance=ExtResource("123_7ot3x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 128)
+
+[node name="plate" parent="." instance=ExtResource("124_tlamx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 128)
+
+[node name="plate_food_A" parent="." instance=ExtResource("125_kfylh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0, 128)
+
+[node name="plate_food_B" parent="." instance=ExtResource("126_tx7es")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 128)
+
+[node name="plate_small" parent="." instance=ExtResource("127_nxanu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96, 0, 128)
+
+[node name="plate_stack" parent="." instance=ExtResource("128_fqajj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 112, 0, 128)
+
+[node name="rubble_half" parent="." instance=ExtResource("129_q1r0o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 128)
+
+[node name="rubble_large" parent="." instance=ExtResource("130_mmtq5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 144, 0, 128)
+
+[node name="shelf_large" parent="." instance=ExtResource("131_0ab1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 128)
+
+[node name="shelf_small" parent="." instance=ExtResource("132_dqq32")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 176, 0, 128)
+
+[node name="shelf_small_candles" parent="." instance=ExtResource("133_5lpsh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 192, 0, 128)
+
+[node name="shelves" parent="." instance=ExtResource("134_bhrxx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 208, 0, 128)
+
+[node name="stairs" parent="." instance=ExtResource("135_2tp8s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 224, 0, 128)
+
+[node name="stairs_long" parent="." instance=ExtResource("136_jgcos")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 144)
+
+[node name="stairs_long_modular_center" parent="." instance=ExtResource("137_4vmi4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 144)
+
+[node name="stairs_long_modular_left" parent="." instance=ExtResource("138_547ku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 144)
+
+[node name="stairs_long_modular_right" parent="." instance=ExtResource("139_lyuyk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 144)
+
+[node name="stairs_modular_center" parent="." instance=ExtResource("140_vmne4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0, 144)
+
+[node name="stairs_modular_left" parent="." instance=ExtResource("141_8omij")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 144)
+
+[node name="stairs_modular_right" parent="." instance=ExtResource("142_c47aj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96, 0, 144)
+
+[node name="stairs_narrow" parent="." instance=ExtResource("143_e05ho")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 112, 0, 144)
+
+[node name="stairs_walled" parent="." instance=ExtResource("144_26fhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 144)
+
+[node name="stairs_wall_left" parent="." instance=ExtResource("145_t2n5s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 144, 0, 144)
+
+[node name="stairs_wall_right" parent="." instance=ExtResource("146_orto2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 144)
+
+[node name="stairs_wide" parent="." instance=ExtResource("147_ax75n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 176, 0, 144)
+
+[node name="stairs_wood" parent="." instance=ExtResource("148_5puav")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 192, 0, 144)
+
+[node name="stairs_wood_decorated" parent="." instance=ExtResource("149_cn73y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 208, 0, 144)
+
+[node name="stool" parent="." instance=ExtResource("150_r1fob")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 224, 0, 144)
+
+[node name="sword_shield" parent="." instance=ExtResource("151_pl26j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 160)
+
+[node name="sword_shield_broken" parent="." instance=ExtResource("152_b5ouh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 160)
+
+[node name="sword_shield_gold" parent="." instance=ExtResource("153_bwk8a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 160)
+
+[node name="table_long" parent="." instance=ExtResource("154_lce5u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 160)
+
+[node name="table_long_broken" parent="." instance=ExtResource("155_u8o3m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0, 160)
+
+[node name="table_long_decorated_A" parent="." instance=ExtResource("156_eyacf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 160)
+
+[node name="table_long_decorated_C" parent="." instance=ExtResource("157_rwlmx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96, 0, 160)
+
+[node name="table_long_tablecloth" parent="." instance=ExtResource("158_ogjil")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 112, 0, 160)
+
+[node name="table_long_tablecloth_decorated_A" parent="." instance=ExtResource("159_ee3tq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 160)
+
+[node name="table_medium" parent="." instance=ExtResource("160_25dxv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 144, 0, 160)
+
+[node name="table_medium_broken" parent="." instance=ExtResource("161_amv7d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 160)
+
+[node name="table_medium_decorated_A" parent="." instance=ExtResource("162_jd5lq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 176, 0, 160)
+
+[node name="table_medium_tablecloth" parent="." instance=ExtResource("163_al2eo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 192, 0, 160)
+
+[node name="table_medium_tablecloth_decorated_B" parent="." instance=ExtResource("164_dvju3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 208, 0, 160)
+
+[node name="table_small" parent="." instance=ExtResource("165_tiglo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 224, 0, 160)
+
+[node name="table_small_decorated_A" parent="." instance=ExtResource("166_rytrc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 176)
+
+[node name="table_small_decorated_B" parent="." instance=ExtResource("167_0s0wr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 176)
+
+[node name="torch" parent="." instance=ExtResource("168_fdi00")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 176)
+
+[node name="torch_lit" parent="." instance=ExtResource("169_j1uck")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 176)
+
+[node name="torch_mounted" parent="." instance=ExtResource("170_ugmkj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0, 176)
+
+[node name="trunk_large_A" parent="." instance=ExtResource("171_u363t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 176)
+
+[node name="trunk_large_B" parent="." instance=ExtResource("172_gmcg2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96, 0, 176)
+
+[node name="trunk_large_C" parent="." instance=ExtResource("173_liioh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 112, 0, 176)
+
+[node name="trunk_medium_A" parent="." instance=ExtResource("174_ck683")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 176)
+
+[node name="trunk_medium_B" parent="." instance=ExtResource("175_jxush")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 144, 0, 176)
+
+[node name="trunk_medium_C" parent="." instance=ExtResource("176_g6p0w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 176)
+
+[node name="trunk_small_A" parent="." instance=ExtResource("177_4vfuj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 176, 0, 176)
+
+[node name="trunk_small_B" parent="." instance=ExtResource("178_cgg4i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 192, 0, 176)
+
+[node name="trunk_small_C" parent="." instance=ExtResource("179_mvhwe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 208, 0, 176)
+
+[node name="wall" parent="." instance=ExtResource("180_bracp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 224, 0, 176)
+
+[node name="wall_arched" parent="." instance=ExtResource("181_qrjd3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 192)
+
+[node name="wall_archedwindow_gated" parent="." instance=ExtResource("182_7bmx0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 192)
+
+[node name="wall_archedwindow_gated_scaffold" parent="." instance=ExtResource("183_e48qw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 192)
+
+[node name="wall_archedwindow_open" parent="." instance=ExtResource("184_crb2t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 192)
+
+[node name="wall_broken" parent="." instance=ExtResource("185_ea3gw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0, 192)
+
+[node name="wall_corner" parent="." instance=ExtResource("186_1wirm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 192)
+
+[node name="wall_corner_gated" parent="." instance=ExtResource("187_chv8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96, 0, 192)
+
+[node name="wall_corner_scaffold" parent="." instance=ExtResource("188_1eh50")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 112, 0, 192)
+
+[node name="wall_corner_small" parent="." instance=ExtResource("189_b4033")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 192)
+
+[node name="wall_cracked" parent="." instance=ExtResource("190_lnrb2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 144, 0, 192)
+
+[node name="wall_crossing" parent="." instance=ExtResource("191_eb82n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 192)
+
+[node name="wall_doorway" parent="." instance=ExtResource("192_o0t3h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 176, 0, 192)
+
+[node name="wall_doorway_scaffold" parent="." instance=ExtResource("193_4lsen")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 192, 0, 192)
+
+[node name="wall_doorway_sides" parent="." instance=ExtResource("194_35w1x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 208, 0, 192)
+
+[node name="wall_doorway_Tsplit" parent="." instance=ExtResource("195_urlcj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 224, 0, 192)
+
+[node name="wall_endcap" parent="." instance=ExtResource("196_xuiff")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 208)
+
+[node name="wall_gated" parent="." instance=ExtResource("197_ola84")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 208)
+
+[node name="wall_half" parent="." instance=ExtResource("198_i6tsp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 208)
+
+[node name="wall_half_endcap" parent="." instance=ExtResource("199_udkgp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 208)
+
+[node name="wall_half_endcap_sloped" parent="." instance=ExtResource("200_l5gll")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0, 208)
+
+[node name="wall_open_scaffold" parent="." instance=ExtResource("201_kjyn7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 208)
+
+[node name="wall_pillar" parent="." instance=ExtResource("202_sfsp0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96, 0, 208)
+
+[node name="wall_scaffold" parent="." instance=ExtResource("203_x66x0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 112, 0, 208)
+
+[node name="wall_shelves" parent="." instance=ExtResource("204_ah5lq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 208)
+
+[node name="wall_sloped" parent="." instance=ExtResource("205_w435e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 144, 0, 208)
+
+[node name="wall_Tsplit" parent="." instance=ExtResource("206_163v3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 208)
+
+[node name="wall_Tsplit_sloped" parent="." instance=ExtResource("207_w4arn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 176, 0, 208)
+
+[node name="wall_window_closed" parent="." instance=ExtResource("208_qcl5b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 192, 0, 208)
+
+[node name="wall_window_closed_scaffold" parent="." instance=ExtResource("209_e22co")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 208, 0, 208)
+
+[node name="wall_window_open" parent="." instance=ExtResource("210_18nk8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 224, 0, 208)
+
+[node name="wall_window_open_scaffold" parent="." instance=ExtResource("211_ywhcn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 224)

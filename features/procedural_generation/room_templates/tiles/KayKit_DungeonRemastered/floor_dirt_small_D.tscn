@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=4 uid="uid://b8tytkm2g4cwh"]
+
+[ext_resource type="Texture2D" uid="uid://dhtu10vo0gh35" path="res://assets/environments/KayKit_DungeonRemastered_1.1_FREE/Assets/gltf/dungeon_texture.png" id="1_2c78u"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_eqmm1"]
+points = PackedVector3Array(-1.0000124, -0.099999994, -1.0000004, -1.0000124, -0.099999994, 0.99999964, -1.0000124, 0.019994818, -1.0000004, 0.9999876, -0.099999994, -1.0000004, -1.0000124, 0.019994818, 0.99999964, 0.9999876, -0.099999994, 0.99999964, 0.1290009, 0.038437843, 0.22122121, 0.20633054, 0.038437843, 0.21202004, 0.9999876, 0.019994818, -1.0000004, 0.9999876, 0.019994818, 0.99999964, 0.18538308, 0.038437843, 0.2826935)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_578gg"]
+resource_name = "texture"
+albedo_texture = ExtResource("1_2c78u")
+roughness = 0.45
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ktk1x"]
+_surfaces = [{
+"aabb": AABB(-1.0000124, -0.099999994, -1.0000004, 2, 0.13843784, 2),
+"format": 34359742465,
+"index_count": 60,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAgADAAQAAwAFAAQAAwABAAYABgAFAAMABgABAAAABwAFAAYAAAAIAAYACAAHAAYACQAKAAsADAALAAoADQALAAwADQAJAAsADAAKAA4ADwAJAA0ACQAQAAoADwAQAAkADgAKABAADgAQAA8A"),
+"name": "texture",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 17,
+"vertex_data": PackedByteArray("1uqBPgAAAABAhmY+cEpTPv9wHT2oLVk+8LYkPgAAAAA45ho+FEgEPv9wHT0oo2I+aGTJPQAAAACQc2M+CPjEPQAAAACIlJ4+HNo9Pv9wHT2Iv5A+BB0UPgAAAAAU6a8+xDNlPgAAAABwkZY+aACAvwrXozwCAIC/MP9/PwrXozz6/38/aACAvwrXozz6/38/aACAv8zMzL36/38/aACAv8zMzL0CAIC/MP9/P8zMzL36/38/MP9/P8zMzL0DAIC/MP9/PwrXozwDAIC/")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_2wcdd"]
+resource_name = "floor_dirt_small_D_floor_dirt_small_D"
+_surfaces = [{
+"aabb": AABB(-1.0000124, -0.099999994, -1.0000004, 2, 0.13843784, 2),
+"attribute_data": PackedByteArray("Wi8lP+ibOD5aLyU/GJj9PU2IJz/omzg+Tl84P1AroT1bBjY/MDA7PapGMT+gVkI9CSEvP8DAbDxaLyU/MDA7PatUKz9QK6E9CSEvPxiYvT1bBjY/6Js4PgkhLz+8FFU+TYgnP+ibOD5aLyU/GJj9PU2IJz8YmP09qkYxP7wUVT5OXzg/qJUgPqpGMT+olQA+q1QrP6iVID7PESI/uEElPgCALT+4QSU+zxEiP7hBJT4AgC0/uEElPs8RIj+4QSU+AIAtP7hBJT4AgC0/uEElPs8RIj+4QSU+AIAtP7hBJT7PESI/uEElPs8RIj+4QSU+AIAtP7hBJT7PESI/uEElPs8RIj+4QSU+zxEiP7hBJT7PESI/uEElPgCALT+4QSU+AIAtP7hBJT4AgC0/uEElPgCALT+4QSU+"),
+"format": 34359742487,
+"index_count": 60,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUABQAEAAYABgAHAAUABQAHAAgACQAKAAsADAAJAAsADAANAA4ADwAQABEAEgAPABEAEwAUABUAEwAWABQAFwAYABkAFwAaABgAGwAcAB0AGwAeABwAHwAgACEAHwAiACAAIwAkACUAIwAmACQA"),
+"material": SubResource("StandardMaterial3D_578gg"),
+"name": "texture",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 39,
+"vertex_data": PackedByteArray("1uqBPgAAAABAhmY+cEpTPv9wHT2oLVk+8LYkPgAAAAA45ho+BB0UPgAAAAAU6a8+CPjEPQAAAACIlJ4+HNo9Pv9wHT2Iv5A+FEgEPv9wHT0oo2I+cEpTPv9wHT2oLVk+1uqBPgAAAABAhmY+FEgEPv9wHT0oo2I+CPjEPQAAAACIlJ4+aGTJPQAAAACQc2M+8LYkPgAAAAA45ho+cEpTPv9wHT2oLVk+FEgEPv9wHT0oo2I+xDNlPgAAAABwkZY+BB0UPgAAAAAU6a8+HNo9Pv9wHT2Iv5A+1uqBPgAAAABAhmY+aACAvwrXozwCAIC/MP9/PwrXozz6/38/aACAvwrXozz6/38/MP9/PwrXozwDAIC/aACAv8zMzL36/38/MP9/PwrXozz6/38/MP9/P8zMzL36/38/aACAvwrXozz6/38/MP9/P8zMzL0DAIC/aACAvwrXozwCAIC/aACAv8zMzL0CAIC/MP9/PwrXozwDAIC/aACAv8zMzL0CAIC/aACAvwrXozz6/38/aACAv8zMzL36/38/aACAvwrXozwCAIC/MP9/P8zMzL36/38/MP9/PwrXozwDAIC/MP9/P8zMzL0DAIC/MP9/PwrXozz6/38/TN461gAAV9xM3jrWAABX3EzeOtYAAFfcxmnzyew3+08sXg7IdTw5U5SRwc6iR8hF/EhN23pF/0eEoFbnDGXwODaxRb0+Xt8//EhN2wVYy8AsXg7IEn7ZsKcvFsTlXjG/JT0P6agnv7eEoFbnxSJxzPxITdt2NHCvgKpOtGdGFT1tn0mu2EtBS5SRwc6sRVhFNrFFvYZPpjT/f///////v/9///////+//3///////7//f///////v/9//3////8//3//f////z//f/9/////P/9//3////8/AAD//////78AAP//////vwAA//////+/AAD//////78AAP9/////vwAA/3////+/AAD/f////78AAP9/////v////3////+/////f////7////9/////v////3////+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_ktk1x")
+
+[node name="floor_dirt_small_D" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="floor_dirt_small_D_Collision" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_eqmm1")
+
+[node name="floor_dirt_small_D" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_2wcdd")
+skeleton = NodePath("")

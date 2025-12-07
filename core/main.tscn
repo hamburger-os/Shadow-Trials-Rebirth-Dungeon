@@ -2,43 +2,18 @@
 
 [ext_resource type="PackedScene" uid="uid://dqyuwotmb8s6h" path="res://features/player/player.tscn" id="1_f3sb7"]
 [ext_resource type="PackedScene" uid="uid://dmnrjhqljhwoy" path="res://features/enemies/enemy.tscn" id="3_3gdo0"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_gv5m4"]
-uv2_padding = 1.0
-size = Vector3(50, 1, 50)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_f3sb7"]
-size = Vector3(50, 1, 50)
+[ext_resource type="Script" path="res://core/main.gd" id="5_55ykw"]
+[ext_resource type="PackedScene" uid="uid://b0jc2tq68aydm" path="res://features/procedural_generation/room_templates/dungeon_01.tscn" id="4_csopv"]
 
 [node name="世界" type="Node3D"]
+script = ExtResource("5_55ykw")
+player_path = NodePath("主角")
+enemy_scene = ExtResource("3_3gdo0")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.8660254, -0.3535534, 0.35355335, 0, 0.7071067, 0.7071068, -0.5, -0.61237246, 0.61237234, 0, 50, 0)
 shadow_enabled = true
 
-[node name="地面" type="StaticBody3D" parent="."]
-collision_layer = 2
-collision_mask = 0
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="地面"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("BoxMesh_gv5m4")
-skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="地面"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-shape = SubResource("BoxShape3D_f3sb7")
-
 [node name="主角" parent="." instance=ExtResource("1_f3sb7")]
 
-[node name="敌人" parent="." instance=ExtResource("3_3gdo0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.8651466)
-
-[node name="敌人2" parent="." instance=ExtResource("3_3gdo0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0447135, 0, 0)
-
-[node name="敌人3" parent="." instance=ExtResource("3_3gdo0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15.075769)
-
-[node name="敌人4" parent="." instance=ExtResource("3_3gdo0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.926074, 0, 0)
+[node name="Dungeon01" parent="." instance=ExtResource("4_csopv")]

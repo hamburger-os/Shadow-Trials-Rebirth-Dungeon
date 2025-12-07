@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="DungeonRuleSet" load_steps=7 format=3 uid="uid://cn6eaiw0oayc2"]
+
+[ext_resource type="Script" uid="uid://bibv1xh8logi8" path="res://features/procedural_generation/room_templates/dungeon_rule_set.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://cgyxj6fq364vf" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_tile_large.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://clfivl7dbohi4" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/floor_tile_large_rocks.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://dhr1jlhktpaju" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_straight.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://5jw587jirrqx" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_corner.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://sl1a0r4whn6y" path="res://features/procedural_generation/room_templates/tiles/KayKit_DungeonRemastered/wall_doorway.tscn" id="7"]
+
+[resource]
+script = ExtResource("1")
+tiles = Array[Resource]([ExtResource("3"), ExtResource("4"), ExtResource("5"), ExtResource("6"), ExtResource("7")])
