@@ -1,10 +1,12 @@
 extends Node3D
 
 @export var weapon_data: WeaponData
+@export_node_path("AudioStreamPlayer3D") var attack_sfx_path: NodePath = NodePath("SfxAttack")
 
 @onready var hitbox: Area3D = $Hitbox
 @onready var collision_shape: CollisionShape3D = $Hitbox/CollisionShape3D
 @onready var mesh_instance: MeshInstance3D = $Mesh
+@onready var attack_sfx: AudioStreamPlayer3D = get_node_or_null(attack_sfx_path) as AudioStreamPlayer3D
 
 var _owner_player: CharacterBody3D
 
@@ -26,12 +28,23 @@ func _find_owner_player() -> CharacterBody3D:
 func _apply_weapon_data() -> void:
 	if not weapon_data:
 		return
+	if not attack_sfx:
+		attack_sfx = get_node_or_null(attack_sfx_path) as AudioStreamPlayer3D
 
 	if mesh_instance and weapon_data.weapon_mesh:
 		mesh_instance.mesh = weapon_data.weapon_mesh
 
 	if collision_shape and weapon_data.hitbox_shape:
 		collision_shape.shape = weapon_data.hitbox_shape
+
+	if attack_sfx and weapon_data.hit_sound:
+		attack_sfx.stream = weapon_data.hit_sound
+
+
+func play_attack_sfx() -> void:
+	if attack_sfx:
+		attack_sfx.stop()
+		attack_sfx.play()
 
 
 func _on_hitbox_body_entered(body: Node3D) -> void:

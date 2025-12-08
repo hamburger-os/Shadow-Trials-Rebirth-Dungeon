@@ -6,6 +6,7 @@
 
 [node name="基础武器" type="Node3D"]
 script = ExtResource("1_weapon")
+attack_sfx_path = NodePath("SfxAttack")
 
 [node name="Hitbox" type="Area3D" parent="."]
 collision_layer = 8
@@ -15,6 +16,8 @@ collision_mask = 4
 shape = SubResource("BoxShape3D_default")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
+
+[node name="SfxAttack" type="AudioStreamPlayer3D" parent="."]
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]

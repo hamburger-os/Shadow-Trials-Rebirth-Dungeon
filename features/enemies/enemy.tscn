@@ -1,8 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://dmnrjhqljhwoy"]
+[gd_scene load_steps=26 format=3 uid="uid://dmnrjhqljhwoy"]
 
 [ext_resource type="Script" uid="uid://duj1jk6lb1w6g" path="res://features/enemies/enemy.gd" id="1_f0acv"]
 [ext_resource type="Script" uid="uid://0pbnqnx6v3xy" path="res://features/shared/resources/character_stats.gd" id="2_4ad74"]
 [ext_resource type="PackedScene" uid="uid://buv3ndwqks7oq" path="res://features/enemies/skeleton_minion.tscn" id="3_dkn5w"]
+[ext_resource type="AudioStream" uid="uid://vf7272cth5aq" path="res://assets/audio/skeleton/Bluezone_BC0301_tiny_gears_small_mechanism_click_003_机械装置点击.wav" id="4_qnv5d"]
+[ext_resource type="AudioStream" uid="uid://dce8vv7l4rxb5" path="res://assets/audio/skeleton/GOREBone_Bone Breaks Celery 01_JSE_GMP_骨头断裂.wav" id="5_b1a0d"]
+[ext_resource type="AudioStream" uid="uid://ccyde4brfg3qa" path="res://assets/audio/skeleton/GOREFlsh_Flesh Drops on Floor 03_JSE_GMP_肉块掉落.wav" id="6_gwuxy"]
 
 [sub_resource type="Resource" id="Resource_dkn5w"]
 script = ExtResource("2_4ad74")
@@ -4401,6 +4404,9 @@ collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_f0acv")
 stats = SubResource("Resource_dkn5w")
+attack_sfx_path = NodePath("SfxAttack")
+hit_sfx_path = NodePath("SfxHit")
+death_sfx_path = NodePath("SfxDie")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
@@ -4419,3 +4425,12 @@ libraries = {
 root_node = NodePath("../VisualRoot/Skeleton_Minion")
 tree_root = SubResource("AnimationNodeStateMachine_dkn5w")
 anim_player = NodePath("../VisualRoot/Skeleton_Minion/AnimationPlayer")
+
+[node name="SfxAttack" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_qnv5d")
+
+[node name="SfxHit" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_b1a0d")
+
+[node name="SfxDie" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_gwuxy")

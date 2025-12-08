@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dce8vv7l4rxb5"
+path="res://.godot/imported/GOREBone_Bone Breaks Celery 01_JSE_GMP_骨头断裂.wav-4ae3dc716db5a18ed71ad9f67c30bfb5.sample"
+
+[deps]
+
+source_file="res://assets/audio/skeleton/GOREBone_Bone Breaks Celery 01_JSE_GMP_骨头断裂.wav"
+dest_files=["res://.godot/imported/GOREBone_Bone Breaks Celery 01_JSE_GMP_骨头断裂.wav-4ae3dc716db5a18ed71ad9f67c30bfb5.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

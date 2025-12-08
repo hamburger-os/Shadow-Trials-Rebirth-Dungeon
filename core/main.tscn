@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://dqyuwotmb8s6h" path="res://features/player/player.tscn" id="1_f3sb7"]
 [ext_resource type="PackedScene" uid="uid://dmnrjhqljhwoy" path="res://features/enemies/enemy.tscn" id="3_3gdo0"]
-[ext_resource type="Script" path="res://core/main.gd" id="5_55ykw"]
 [ext_resource type="PackedScene" uid="uid://b0jc2tq68aydm" path="res://features/procedural_generation/room_templates/dungeon_01.tscn" id="4_csopv"]
+[ext_resource type="Script" uid="uid://bbrp0wgbywsll" path="res://core/main.gd" id="5_55ykw"]
 
 [node name="世界" type="Node3D"]
 script = ExtResource("5_55ykw")

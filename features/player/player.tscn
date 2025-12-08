@@ -1,10 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://dqyuwotmb8s6h"]
+[gd_scene load_steps=22 format=3 uid="uid://dqyuwotmb8s6h"]
 
 [ext_resource type="Script" uid="uid://bqf5r5c0xpy5d" path="res://features/player/player.gd" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://0pbnqnx6v3xy" path="res://features/shared/resources/character_stats.gd" id="3_emvbc"]
 [ext_resource type="PackedScene" uid="uid://c72lcjq0sqgte" path="res://features/player/barbarian.tscn" id="4_6xbq4"]
 [ext_resource type="PackedScene" uid="uid://botaa6smopch2" path="res://features/combat/weapons/base_weapon.tscn" id="5_weapon"]
 [ext_resource type="Resource" uid="uid://ds1j1uu0lu8xb" path="res://data/items/bases/sword_2handed_color.tres" id="6_weapon_data"]
+[ext_resource type="AudioStream" uid="uid://blr2f1wgcekns" path="res://assets/audio/player/HMNBrth_Human, Adult, Male, Breath, Surprise, Gasp_UberDuo_INHL_17.wav" id="6_y2cyt"]
 
 [sub_resource type="Resource" id="Resource_i250s"]
 script = ExtResource("3_emvbc")
@@ -3109,6 +3110,9 @@ collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_4flbx")
 stats = SubResource("Resource_i250s")
+attack_sfx_path = NodePath("SfxAttack")
+hurt_sfx_path = NodePath("SfxHurt")
+death_sfx_path = NodePath("SfxDie")
 weapon_scene = ExtResource("5_weapon")
 weapon_data = ExtResource("6_weapon_data")
 camera_path = NodePath("SpringArm3D/Camera3D")
@@ -3139,3 +3143,10 @@ size = 20.0
 root_node = NodePath("../VisualRoot/Barbarian")
 tree_root = SubResource("AnimationNodeStateMachine_uqugw")
 anim_player = NodePath("../VisualRoot/Barbarian/AnimationPlayer")
+
+[node name="SfxAttack" type="AudioStreamPlayer3D" parent="."]
+
+[node name="SfxHurt" type="AudioStreamPlayer3D" parent="."]
+
+[node name="SfxDie" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_y2cyt")

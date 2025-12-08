@@ -14,6 +14,9 @@ extends CharacterBody3D
 @export var anim_name_attack: StringName = "Melee_1H_Attack_Slice_Diagonal"
 @export var anim_name_die: StringName = "Death_A"
 @export var respawn_delay: float = 0.5
+@export_node_path("AudioStreamPlayer3D") var attack_sfx_path: NodePath = NodePath("SfxAttack")
+@export_node_path("AudioStreamPlayer3D") var hurt_sfx_path: NodePath = NodePath("SfxHurt")
+@export_node_path("AudioStreamPlayer3D") var death_sfx_path: NodePath = NodePath("SfxDie")
 @export var weapon_scene: PackedScene
 @export var weapon_data: WeaponData
 
@@ -40,6 +43,10 @@ var _attack_anim_index: int = 0
 var _attack_anim_node: AnimationNodeAnimation
 var _is_dead: bool = false
 var _death_time_remaining: float = 0.0
+var _sfx_attack: AudioStreamPlayer3D
+var _sfx_hurt: AudioStreamPlayer3D
+var _sfx_die: AudioStreamPlayer3D
+var _weapon_instance: Node3D
 
 
 func _ready() -> void:
@@ -49,6 +56,7 @@ func _ready() -> void:
 	_update_attack_anim_from_weapon()
 	_setup_animation_tree()
 	_equip_weapon()
+	_setup_audio()
 
 
 func _physics_process(delta: float) -> void:
@@ -339,6 +347,7 @@ func _play_attack_animation() -> float:
 	# 确保挥砍 / 刺击动作可以按顺序反复循环。
 	_current_move_state = "Attack"
 	anim_state.start("Attack")
+	_play_weapon_attack_sfx()
 
 	attack_anim_time_remaining = desired_duration
 	return desired_duration
@@ -380,6 +389,7 @@ func take_damage(damage_amount: int) -> void:
 
 	stats.current_health -= damage_amount
 	print("主角受到 %s 点伤害，剩余 %s" % [damage_amount, stats.current_health])
+	_play_sfx(_sfx_hurt)
 	if stats.current_health <= 0:
 		_on_death()
 
@@ -413,6 +423,7 @@ func _on_death() -> void:
 	var death_anim_length := _get_anim_length(anim_name_die)
 	_death_time_remaining = death_anim_length + respawn_delay
 	_set_move_state("Die", true)
+	_play_sfx(_sfx_die)
 
 
 func _get_anim_length(anim_name: StringName) -> float:
@@ -423,20 +434,42 @@ func _get_anim_length(anim_name: StringName) -> float:
 	return 0.0
 
 
+func _play_weapon_attack_sfx() -> void:
+	if _weapon_instance and _weapon_instance.has_method("play_attack_sfx"):
+		_weapon_instance.call("play_attack_sfx")
+	elif _sfx_attack:
+		_play_sfx(_sfx_attack)
+
+
+func _setup_audio() -> void:
+	_sfx_attack = get_node_or_null(attack_sfx_path) as AudioStreamPlayer3D
+	_sfx_hurt = get_node_or_null(hurt_sfx_path) as AudioStreamPlayer3D
+	_sfx_die = get_node_or_null(death_sfx_path) as AudioStreamPlayer3D
+
+
+func _play_sfx(player: AudioStreamPlayer3D) -> void:
+	if not player:
+		return
+	if not player.stream:
+		return
+	player.stop()
+	player.play()
+
+
 func _equip_weapon() -> void:
 	if not weapon_scene:
 		return
 
-	var weapon_instance := weapon_scene.instantiate()
-	if weapon_instance == null:
+	_weapon_instance = weapon_scene.instantiate()
+	if _weapon_instance == null:
 		return
 
 	var attach_parent: Node3D = get_node_or_null("VisualRoot/Barbarian/Rig_Medium/Skeleton3D/Barbarian_BoneHandr") as Node3D
 	if attach_parent == null:
 		attach_parent = visual_root
 
-	attach_parent.add_child(weapon_instance)
+	attach_parent.add_child(_weapon_instance)
 
-	if weapon_data and weapon_instance.has_method("_apply_weapon_data"):
-		weapon_instance.set("weapon_data", weapon_data)
-		weapon_instance.call("_apply_weapon_data")
+	if weapon_data and _weapon_instance.has_method("_apply_weapon_data"):
+		_weapon_instance.set("weapon_data", weapon_data)
+		_weapon_instance.call("_apply_weapon_data")

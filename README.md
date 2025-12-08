@@ -40,22 +40,24 @@
 
 - **入口与场景**
   - `project.godot` 中 `run/main_scene` 指向 `core/main.tscn`。  
-  - `core/main.tscn` 是一个测试场景：包含程序化生成的地牢地面（WFC 版），一个玩家角色（野蛮人模型）和若干静态放置的骷髅敌人，用于验证移动、冲刺、武器攻击和基础战斗循环。
-  - `features/procedural_generation/wfc_dungeon_generator.tscn`：基于 KayKit Dungeon Remastered 素材的 WFC 网格生成器，暴露 `grid_width/grid_height`（格子数，默认 32×32 ≈ 128m）、`cell_size`、`seed` 等参数；生成后自动将 `主角` 与测试敌人对齐到首个可行走格子。
-  - `features/procedural_generation/room_templates/dungeon_rule_set.tres`：使用 4m 基准砖块的初始规则集（floor_large/rocks、wall/doorway/corner），供生成器选取地板和墙体变体。
+  - `core/main.tscn`：包含玩家 (`features/player/player.tscn`)、基于 KayKit Dungeon MeshLibrary 的静态房间 `features/procedural_generation/room_templates/dungeon_01.tscn`（附带循环 BGM），以及负责刷怪的 `core/main.gd`。
+  - `core/main.gd`：按设定的间隔、数量与上下限，在玩家周围随机半径处生成敌人，自动为敌人设置追击目标，支持初始延迟、最小/最大刷怪距离与总数上限。
+  - 程序化地牢生成器仍保留：`features/procedural_generation/wfc_dungeon_generator.tscn` / `wfc_dungeon_generator.gd` 使用 `room_templates/dungeon_rule_set.tres` 做 WFC 网格生成，可选地在生成后把主角等节点吸附到首个可走格子。
 - **玩家（features/player）**
   - `features/player/player.tscn`：`CharacterBody3D` + `SpringArm3D/Camera3D`，挂载 KayKit Barbarian 角色和手部挂点（`BoneAttachment3D`），实现俯视相机跟随。  
   - `features/player/player.gd`：实现
-    - 基于 `move_left/move_right/move_forward/move_back` 的相机相对移动；
-    - `dash` 冲刺（带持续时间和冷却）；
-    - 通过武器挂载的 `Area3D`（Hitbox）进行近战范围检测的**自动攻击**，伤害、攻速和攻击距离优先由 `WeaponData` 驱动（否则退回角色 `CharacterStats`）；
-    - 使用 `AnimationTree + AnimationNodeStateMachine` 管理 Idle/Run/Dash/Attack 状态，根据武器攻速自动调整攻击动画节奏；
-    - 自动朝向当前攻击目标（优先最近敌人），否则朝向移动方向。
+    - 基于 `move_left/move_right/move_forward/move_back` 的相机相对移动；`dash` 冲刺（带持续时间和冷却）；
+    - 通过武器 Hitbox 转发的 `Area3D` 触发**自动攻击**，伤害/攻速/攻击范围由 `WeaponData` 驱动（否则退回角色 `CharacterStats`），攻击动画可按 `attack_animation_names` 轮播并随攻速拉伸时长；
+    - 使用 `AnimationTree + AnimationNodeStateMachine` 管理 Idle/Run/Dash/Attack/Die 状态，自动朝向最近敌人，否则朝向移动方向；
+    - 武器装备流水线：在手部挂点实例化 `base_weapon.tscn`，自动同步武器 Mesh/Hitbox/命中音效，攻击时优先播放武器音效；
+    - 受伤/死亡：扣血并播放受伤/死亡音效与动画，延时后自动重新加载当前场景。
 - **敌人（features/enemies）**
   - `features/enemies/enemy.tscn`：`CharacterBody3D` 敌人，使用 KayKit Skeleton Minion 模型、胶囊体碰撞和基础攻击/待机动画库。  
   - `features/enemies/enemy.gd`：敌人持有一份独立复制的 `CharacterStats`，实现
-    - `take_damage(damage_amount)`：扣减生命值并打印调试信息；
-    - 生命值小于等于 0 时调用 `die()`，并 `queue_free()` 自毁。
+    - 启动时复制属性资源并设为满血；
+    - 简单追击/攻击 AI：在 `chase_range` 内朝向目标，进入 `attack_range` 时按攻速触发近战伤害；
+    - 状态与表现：AnimationTree 覆盖 Spawn/Idle/Walk/Attack/Hit/Die，受击会硬直，死亡后延迟 `queue_free()`；
+    - 音频：支持攻击/受伤/死亡音效的导出路径绑定。
 - **共享属性与武器资源（features/shared/resources, data, features/combat/weapons）**
   - `features/shared/resources/character_stats.gd`：声明 `Resource` `CharacterStats`，包含
     - `max_health`、`attack_power`、`attack_interval`；
@@ -73,13 +75,12 @@
 
 **尚未实现 / 仅有目录或设计的模块**
 
-- `core/main.gd`、`core/globals.gd`、`core/scene_manager.gd`：文档中作为目标架构存在，当前仓库中**尚未创建**，场景切换与全局配置也尚未抽象为 Autoload。  
-- `data/characters`、`data/skills`：当前为空目录，尚未有实际 `.tres` 数据资产；`data/items` 目前仅有一个基础武器数据 `bases/sword_2handed_color.tres`，用于测试近战武器流程。  
-- `features/combat/`：目前仅实现 `weapons/base_weapon.tscn` + `base_weapon.gd` 作为近战武器挂载与命中转发，其余战斗子系统（弹道、状态效果、伤害公式抽象等）仍处于规划阶段。  
-- `features/inventory/`、`features/procedural_generation/`、`features/ui/`：仅创建了目录（部分目录甚至为空），README 中对这些模块的描述属于未来规划。  
-- `features/shared/components/`、`features/shared/state_machine/`：目前仅存在若干基础 Resource（如 `resources/character_stats.gd`、`resources/weapon_data.gd`），其余通用组件/状态机未实现。  
-- `docs/`、`tests/`、`tools/`：当前为空；README 中提到的 `docs/changelog.md`、打包脚本等还没有落地。  
-- `export_presets.cfg`：项目还未创建导出预设，该文件在仓库中不存在。  
+- `core/globals.gd`、`core/scene_manager.gd`：尚未创建，场景切换、全局配置/事件总线等 Autoload 仍未抽象；现有 `core/main.gd` 仅负责刷怪。  
+- `data/characters`、`data/skills` 目录为空；`data/items` 仅有一个基础武器数据 `bases/sword_2handed_color.tres`。  
+- `features/combat/`：除 `weapons/base_weapon` 外，其余战斗子系统（伤害公式、弹道、状态效果等）尚未落地。  
+- `features/inventory/`、`features/ui/`、`features/shared/components/`、`features/shared/state_machine/`：目录为空或仅有占位，README 中描述的功能属于规划。  
+- `features/procedural_generation/` 当前仅保留 WFC 生成器脚本与静态房间模板，尚未有完整的关卡推进/房间衔接逻辑。  
+- `docs/`、`tests/`、`tools/`：仍为空；`export_presets.cfg` 未生成。  
 - 学习路线中第 3 阶段及之后的内容（完整战斗系统、掉落/背包、程序化关卡、存档与元进度、Steam 集成等）目前都还**没有对应的实现代码**。
 
 阅读后续章节时，可以将其理解为“目标设计文档 + 未来路线图”，以本节为基准判断哪些内容已经在代码中出现、哪些仍处于规划阶段。

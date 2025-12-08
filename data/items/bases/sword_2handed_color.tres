@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="WeaponData" load_steps=4 format=3 uid="uid://ds1j1uu0lu8xb"]
+[gd_resource type="Resource" script_class="WeaponData" load_steps=5 format=3 uid="uid://ds1j1uu0lu8xb"]
 
 [ext_resource type="Script" uid="uid://dyghlalx8eg7q" path="res://features/shared/resources/weapon_data.gd" id="1_gm340"]
+[ext_resource type="AudioStream" uid="uid://c8b5o1pb0e62f" path="res://assets/audio/weapons/WEAPArmr_Metal Shield Block Hits_JSE_MW.wav" id="1_n1p0p"]
 [ext_resource type="ArrayMesh" uid="uid://buohb0dpxr73d" path="res://assets/environments/KayKit_Adventurers_2.0_FREE/Assets/obj/sword_2handed_color.obj" id="2_mesh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_weapon"]
@@ -15,4 +16,5 @@ attack_range = 3.0
 weapon_mesh = ExtResource("2_mesh")
 attack_animation_names = Array[StringName]([&"Melee_1H_Attack_Slice_Diagonal", &"Melee_1H_Attack_Stab"])
 hitbox_shape = SubResource("BoxShape3D_weapon")
+hit_sound = ExtResource("1_n1p0p")
 metadata/_custom_type_script = "uid://dyghlalx8eg7q"

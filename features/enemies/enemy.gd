@@ -6,13 +6,16 @@ extends CharacterBody3D
 @export var chase_range: float = 20.0
 @export var attack_range: float = 1.6
 @export var turn_speed: float = 8.0
-@export var hit_recover_time: float = 2.0
+@export var hit_recover_time: float = 0.5
 @export var anim_name_idle: StringName = "Skeletons_Idle"
 @export var anim_name_walk: StringName = "Skeletons_Walking"
 @export var anim_name_attack: StringName = "Skeletons_Taunt"
 @export var anim_name_spawn: StringName = "Skeletons_Spawn_Ground"
 @export var anim_name_hit: StringName = "Skeletons_Awaken_Standing"
 @export var anim_name_die: StringName = "Skeletons_Death"
+@export_node_path("AudioStreamPlayer3D") var attack_sfx_path: NodePath = NodePath("SfxAttack")
+@export_node_path("AudioStreamPlayer3D") var hit_sfx_path: NodePath = NodePath("SfxHit")
+@export_node_path("AudioStreamPlayer3D") var death_sfx_path: NodePath = NodePath("SfxDie")
 
 @onready var visual_root: Node3D = $VisualRoot
 @onready var anim_tree: AnimationTree = $AnimationTree
@@ -28,6 +31,9 @@ var _hit_recover_remaining: float = 0.0
 var _spawn_time_remaining: float = 0.0
 var _death_time_remaining: float = 0.0
 var _is_dead: bool = false
+var _sfx_attack: AudioStreamPlayer3D
+var _sfx_hit: AudioStreamPlayer3D
+var _sfx_die: AudioStreamPlayer3D
 
 
 func _ready() -> void:
@@ -41,6 +47,7 @@ func _ready() -> void:
 	_setup_animation_tree()
 	_refresh_target()
 	_play_spawn_animation()
+	_setup_audio()
 
 
 func _physics_process(delta: float) -> void:
@@ -132,6 +139,7 @@ func take_damage(damage_amount: int) -> void:
 		die()
 		return
 
+	_play_sfx(_sfx_hit)
 	_hit_recover_remaining = hit_recover_time
 	_attack_anim_remaining = 0.0
 	_attack_cooldown = max(_attack_cooldown, hit_recover_time)
@@ -145,6 +153,7 @@ func die() -> void:
 	_is_dead = true
 	_death_time_remaining = max(_get_anim_length(anim_name_die), 0.8)
 	_set_state("Die", true)
+	_play_sfx(_sfx_die)
 
 
 func _perform_attack() -> void:
@@ -152,6 +161,7 @@ func _perform_attack() -> void:
 	_attack_anim_remaining = max(_get_anim_length(anim_name_attack), 0.4)
 	var interval: float = _get_attack_interval()
 	_attack_cooldown = max(interval, _attack_anim_remaining)
+	_play_sfx(_sfx_attack)
 
 	if target and is_instance_valid(target) and target.has_method("take_damage"):
 		target.call("take_damage", stats.attack_power if stats else 10)
@@ -199,6 +209,21 @@ func _set_state(state: StringName, force_restart: bool = false) -> void:
 
 	_current_state = state
 	anim_state.start(state)
+
+
+func _setup_audio() -> void:
+	_sfx_attack = get_node_or_null(attack_sfx_path) as AudioStreamPlayer3D
+	_sfx_hit = get_node_or_null(hit_sfx_path) as AudioStreamPlayer3D
+	_sfx_die = get_node_or_null(death_sfx_path) as AudioStreamPlayer3D
+
+
+func _play_sfx(player: AudioStreamPlayer3D) -> void:
+	if not player:
+		return
+	if not player.stream:
+		return
+	player.stop()
+	player.play()
 
 
 func _get_attack_interval() -> float:
