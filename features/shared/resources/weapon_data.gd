@@ -7,7 +7,7 @@ class_name WeaponData
 @export var attack_range: float = 1.5
 
 @export var weapon_mesh: Mesh # 武器的模型
-@export var attack_animation_name: StringName = "attack" # 默认攻击动画名
+@export var attack_animation_name: StringName = "default/Melee_1H_Attack_Slice_Diagonal" # 默认攻击动画名
 @export var attack_animation_names: Array[StringName] = [] # 可选：多个攻击动作轮流播放
 @export var hitbox_shape: Shape3D # 后面会用到的Hitbox形状
 @export var hit_sound: AudioStream # 攻击命中时的音效

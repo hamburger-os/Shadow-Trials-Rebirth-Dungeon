@@ -11,6 +11,7 @@ extends Node3D
 @export var max_enemies: int = 12
 @export var auto_spawn_on_ready: bool = true
 @export var initial_spawn_delay: float = 0.25
+@export var enemy_datas: Array[EnemyData] = []
 
 var _player: CharacterBody3D
 var _spawn_timer: Timer
@@ -88,6 +89,12 @@ func _spawn_wave() -> void:
 		var enemy := enemy_scene.instantiate() as Node3D
 		if not enemy:
 			continue
+
+		if enemy_datas.size() > 0:
+			var data_index := randi_range(0, enemy_datas.size() - 1)
+			var selected_data: EnemyData = enemy_datas[data_index]
+			if selected_data:
+				enemy.set("enemy_data", selected_data)
 
 		add_child(enemy)
 		if _player:

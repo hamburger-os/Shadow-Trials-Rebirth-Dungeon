@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=8 format=3 uid="uid://dq4y0gvojvs5c"]
+
+[ext_resource type="Script" uid="uid://b4x0rgnyl660a" path="res://features/shared/resources/character_data.gd" id="1_char_data"]
+[ext_resource type="PackedScene" uid="uid://buv3ndwqks7oq" path="res://features/enemies/skeleton_minion.tscn" id="2_model"]
+[ext_resource type="Script" uid="uid://0pbnqnx6v3xy" path="res://features/shared/resources/character_stats.gd" id="3_stats"]
+[ext_resource type="AudioStream" uid="uid://vf7272cth5aq" path="res://assets/audio/skeleton/Bluezone_BC0301_tiny_gears_small_mechanism_click_003_机械装置点击.wav" id="4_attack"]
+[ext_resource type="AudioStream" uid="uid://dce8vv7l4rxb5" path="res://assets/audio/skeleton/GOREBone_Bone Breaks Celery 01_JSE_GMP_骨头断裂.wav" id="5_hit"]
+[ext_resource type="AudioStream" uid="uid://ccyde4brfg3qa" path="res://assets/audio/skeleton/GOREFlsh_Flesh Drops on Floor 03_JSE_GMP_肉块掉落.wav" id="6_die"]
+
+[sub_resource type="Resource" id="CharacterStats_skeleton"]
+script = ExtResource("3_stats")
+attack_interval = 1.0
+metadata/_custom_type_script = "uid://0pbnqnx6v3xy"
+
+[resource]
+script = ExtResource("1_char_data")
+model_scene = ExtResource("2_model")
+animation_player_path = NodePath("AnimationPlayer")
+weapon_socket_path = NodePath("Rig_Medium/Skeleton3D/Barbarian_BoneHandr")
+stats = SubResource("CharacterStats_skeleton")
+move_speed = 3.2
+turn_speed = 8.0
+dash_speed = 0.0
+dash_duration = 0.0
+dash_cooldown = 0.0
+anim_idle = &"default/Skeletons_Idle"
+anim_run = &"default/Skeletons_Walking"
+anim_dash = &""
+anim_die = &"default/Skeletons_Death"
+anim_spawn = &"default/Skeletons_Spawn_Ground"
+attack_animation_sequence = Array[StringName]([&"default/Melee_Unarmed_Attack_Punch_A", &"default/Melee_Unarmed_Attack_Kick"])
+sfx_attack = ExtResource("4_attack")
+sfx_hurt = ExtResource("5_hit")
+sfx_die = ExtResource("6_die")

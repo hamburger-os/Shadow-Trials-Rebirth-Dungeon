@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://features/shared/resources/enemy_data.gd" id="1_enemy_data"]
+[ext_resource type="Resource" path="res://data/characters/skeleton_minion.tres" id="2_character"]
+
+[resource]
+script = ExtResource("1_enemy_data")
+character = ExtResource("2_character")
+chase_range = 20.0
+attack_range = 1.6
+attack_interval = 1.0
+hit_recover_time = 0.5
+spawn_anim_min_time = 0.8

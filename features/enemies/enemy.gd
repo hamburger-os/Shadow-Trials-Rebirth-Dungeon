@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+@export var enemy_data: EnemyData
 @export var stats: CharacterStats
 @export_node_path("Node3D") var target_path: NodePath
 @export var move_speed: float = 3.2
@@ -19,8 +20,9 @@ extends CharacterBody3D
 
 @onready var visual_root: Node3D = $VisualRoot
 @onready var anim_tree: AnimationTree = $AnimationTree
-@onready var anim_player: AnimationPlayer = $VisualRoot/Skeleton_Minion/AnimationPlayer
+var anim_player: AnimationPlayer
 var anim_state: AnimationNodeStateMachinePlayback
+var model_instance: Node3D
 
 var target: Node3D
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -30,6 +32,7 @@ var _attack_anim_remaining: float = 0.0
 var _hit_recover_remaining: float = 0.0
 var _spawn_time_remaining: float = 0.0
 var _death_time_remaining: float = 0.0
+var _spawn_min_time: float = 0.8
 var _is_dead: bool = false
 var _sfx_attack: AudioStreamPlayer3D
 var _sfx_hit: AudioStreamPlayer3D
@@ -37,13 +40,12 @@ var _sfx_die: AudioStreamPlayer3D
 
 
 func _ready() -> void:
-	if not stats:
-		push_error("character %s 没有分配 CharacterStats!" % name)
+	if not _apply_enemy_data():
+		queue_free()
 		return
-
-	stats = stats.duplicate(true)
-	stats.current_health = stats.max_health
-
+	if not _validate_visual_root():
+		queue_free()
+		return
 	_setup_animation_tree()
 	_refresh_target()
 	_play_spawn_animation()
@@ -240,7 +242,7 @@ func _refresh_target() -> void:
 
 
 func _play_spawn_animation() -> void:
-	_spawn_time_remaining = max(_get_anim_length(anim_name_spawn), 0.8)
+	_spawn_time_remaining = max(_get_anim_length(anim_name_spawn), _spawn_min_time)
 	_set_state("Spawn", true)
 
 
@@ -250,3 +252,100 @@ func _get_anim_length(anim_name: StringName) -> float:
 		if anim:
 			return anim.length
 	return 0.0
+
+
+func _apply_enemy_data() -> bool:
+	if enemy_data:
+		if enemy_data.character:
+			_apply_character_data(enemy_data.character)
+		chase_range = enemy_data.chase_range
+		attack_range = enemy_data.attack_range
+		hit_recover_time = enemy_data.hit_recover_time
+		_spawn_min_time = max(enemy_data.spawn_anim_min_time, 0.0)
+		if enemy_data.character and enemy_data.character.anim_spawn != "":
+			anim_name_spawn = enemy_data.character.anim_spawn
+		if enemy_data.character and enemy_data.character.anim_hit != "":
+			anim_name_hit = enemy_data.character.anim_hit
+		if enemy_data.attack_interval > 0.0 and stats:
+			stats.attack_interval = enemy_data.attack_interval
+
+	if not stats:
+		push_error("character %s 没有分配 CharacterStats!" % name)
+		return false
+
+	# 确保实例拥有独立的属性资源
+	stats = stats.duplicate(true)
+	stats.current_health = stats.max_health
+	return true
+
+
+func _apply_character_data(data: CharacterData) -> void:
+	if data.stats:
+		stats = data.stats.duplicate(true)
+		stats.current_health = stats.max_health
+
+	move_speed = data.move_speed
+	turn_speed = data.turn_speed
+	anim_name_idle = data.anim_idle
+	anim_name_walk = data.anim_run
+	anim_name_attack = data.anim_attack
+	if data.anim_spawn != "":
+		anim_name_spawn = data.anim_spawn
+	if data.anim_hit != "":
+		anim_name_hit = data.anim_hit
+	anim_name_die = data.anim_die
+
+	_load_model_from_data(data)
+	_assign_sfx_from_data(data)
+
+
+func _load_model_from_data(data: CharacterData) -> void:
+	if not visual_root:
+		return
+
+	if data.model_scene:
+		for child in visual_root.get_children():
+			child.queue_free()
+		model_instance = data.model_scene.instantiate() as Node3D
+		if model_instance:
+			visual_root.add_child(model_instance)
+			model_instance.transform = data.visual_transform
+			anim_player = model_instance.get_node_or_null(data.animation_player_path) as AnimationPlayer
+			if not anim_player:
+				anim_player = model_instance.find_child("AnimationPlayer", true, false) as AnimationPlayer
+			if anim_tree:
+				anim_tree.root_node = model_instance.get_path()
+				if anim_player:
+					anim_tree.anim_player = anim_player.get_path()
+	elif visual_root.get_child_count() > 0:
+		model_instance = visual_root.get_child(0) as Node3D
+		if model_instance:
+			anim_player = model_instance.get_node_or_null(data.animation_player_path) as AnimationPlayer
+			if anim_tree and anim_player:
+				anim_tree.root_node = model_instance.get_path()
+				anim_tree.anim_player = anim_player.get_path()
+
+
+func _assign_sfx_from_data(data: CharacterData) -> void:
+	if data.sfx_attack and get_node_or_null(attack_sfx_path) is AudioStreamPlayer3D:
+		var node := get_node(attack_sfx_path) as AudioStreamPlayer3D
+		node.stream = data.sfx_attack
+	if data.sfx_hurt and get_node_or_null(hit_sfx_path) is AudioStreamPlayer3D:
+		var hurt := get_node(hit_sfx_path) as AudioStreamPlayer3D
+		hurt.stream = data.sfx_hurt
+	if data.sfx_die and get_node_or_null(death_sfx_path) is AudioStreamPlayer3D:
+		var die_node := get_node(death_sfx_path) as AudioStreamPlayer3D
+		die_node.stream = data.sfx_die
+
+
+func _validate_visual_root() -> bool:
+	if not visual_root:
+		push_error("敌人 %s 缺少 VisualRoot 节点" % name)
+		return false
+	if visual_root.get_child_count() == 0 and not model_instance:
+		push_error("敌人 %s 的 VisualRoot 为空，未能加载模型" % name)
+		return false
+	if not anim_player:
+		push_error("敌人 %s 没有 AnimationPlayer，无法播放动画" % name)
+		return false
+	return true

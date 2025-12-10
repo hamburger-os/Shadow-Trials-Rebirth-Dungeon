@@ -1,10 +1,11 @@
 extends CharacterBody3D
 
 # ===== 可在 Inspector 中调整的参数 =====
+@export var character_data: CharacterData      # 完整的数据驱动卡
 @export var speed: float = 5.0                 # 水平移动速度
 @export var rotate_to_movement: bool = true    # 是否自动朝向移动方向
 @export var turn_speed: float = 10.0           # 朝向插值速度（越大转身越快）
-@export var stats: CharacterStats             # 玩家角色的属性数据卡
+@export var stats: CharacterStats              # 玩家角色的属性数据卡
 @export var dash_speed: float = 15.0           # 冲刺时的水平速度
 @export var dash_duration: float = 0.2         # 冲刺持续时间（秒）
 @export var dash_cooldown: float = 0.5         # 冲刺冷却时间（秒）
@@ -26,8 +27,9 @@ extends CharacterBody3D
 @onready var camera: Camera3D = get_node_or_null(camera_path) as Camera3D
 @onready var visual_root: Node3D = $VisualRoot
 @onready var anim_tree: AnimationTree = $AnimationTree
-@onready var anim_player: AnimationPlayer = $VisualRoot/Barbarian/AnimationPlayer
+var anim_player: AnimationPlayer
 var anim_state: AnimationNodeStateMachinePlayback
+var model_instance: Node3D
 
 # 使用项目设置中的 3D 默认重力
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -41,6 +43,7 @@ var _current_move_state: StringName = ""
 var attack_anim_time_remaining: float = 0.0
 var _attack_anim_index: int = 0
 var _attack_anim_node: AnimationNodeAnimation
+var _character_attack_anims: Array[StringName] = []
 var _is_dead: bool = false
 var _death_time_remaining: float = 0.0
 var _sfx_attack: AudioStreamPlayer3D
@@ -50,9 +53,12 @@ var _weapon_instance: Node3D
 
 
 func _ready() -> void:
-	if stats:
-		stats = stats.duplicate(true)
+	_apply_character_data()
+	if stats and stats.current_health <= 0:
 		stats.current_health = stats.max_health
+	if not _validate_visual_root():
+		queue_free()
+		return
 	_update_attack_anim_from_weapon()
 	_setup_animation_tree()
 	_equip_weapon()
@@ -354,15 +360,15 @@ func _play_attack_animation() -> float:
 
 
 func _update_attack_anim_from_weapon() -> void:
-	if not weapon_data:
-		return
-
-	if weapon_data.attack_animation_names.size() > 0:
+	if weapon_data:
+		if weapon_data.attack_animation_names.size() > 0:
+			_attack_anim_index = 0
+			anim_name_attack = weapon_data.attack_animation_names[_attack_anim_index]
+		elif weapon_data.attack_animation_name != "":
+			anim_name_attack = weapon_data.attack_animation_name
+	elif _character_attack_anims.size() > 0:
 		_attack_anim_index = 0
-		anim_name_attack = weapon_data.attack_animation_names[_attack_anim_index]
-	elif weapon_data.attack_animation_name != "":
-		anim_name_attack = weapon_data.attack_animation_name
-
+		anim_name_attack = _character_attack_anims[_attack_anim_index]
 	_refresh_attack_node_from_anim_name()
 
 
@@ -373,6 +379,12 @@ func _get_next_attack_anim_name() -> StringName:
 		var anim_name_local: StringName = weapon_data.attack_animation_names[_attack_anim_index]
 		_attack_anim_index += 1
 		return anim_name_local
+	if _character_attack_anims.size() > 0:
+		if _attack_anim_index >= _character_attack_anims.size():
+			_attack_anim_index = 0
+		var anim_name_data: StringName = _character_attack_anims[_attack_anim_index]
+		_attack_anim_index += 1
+		return anim_name_data
 	return anim_name_attack
 
 
@@ -464,7 +476,12 @@ func _equip_weapon() -> void:
 	if _weapon_instance == null:
 		return
 
-	var attach_parent: Node3D = get_node_or_null("VisualRoot/Barbarian/Rig_Medium/Skeleton3D/Barbarian_BoneHandr") as Node3D
+	var attach_parent: Node3D = null
+	if character_data and character_data.weapon_socket_path != NodePath(""):
+		if model_instance:
+			attach_parent = model_instance.get_node_or_null(character_data.weapon_socket_path) as Node3D
+		if attach_parent == null and visual_root:
+			attach_parent = visual_root.get_node_or_null(character_data.weapon_socket_path) as Node3D
 	if attach_parent == null:
 		attach_parent = visual_root
 
@@ -473,3 +490,85 @@ func _equip_weapon() -> void:
 	if weapon_data and _weapon_instance.has_method("_apply_weapon_data"):
 		_weapon_instance.set("weapon_data", weapon_data)
 		_weapon_instance.call("_apply_weapon_data")
+
+
+func _apply_character_data() -> void:
+	if not character_data:
+		if stats:
+			stats = stats.duplicate(true)
+			stats.current_health = stats.max_health
+		return
+
+	if character_data.stats:
+		stats = character_data.stats.duplicate(true)
+		stats.current_health = stats.max_health
+
+	speed = character_data.move_speed
+	rotate_to_movement = character_data.rotate_to_movement
+	turn_speed = character_data.turn_speed
+	dash_speed = character_data.dash_speed
+	dash_duration = character_data.dash_duration
+	dash_cooldown = character_data.dash_cooldown
+	respawn_delay = character_data.respawn_delay
+
+	anim_name_idle = character_data.anim_idle
+	anim_name_run = character_data.anim_run
+	anim_name_dash = character_data.anim_dash
+	anim_name_attack = character_data.anim_attack
+	anim_name_die = character_data.anim_die
+	_character_attack_anims = character_data.attack_animation_sequence.duplicate()
+
+	if character_data.weapon_scene:
+		weapon_scene = character_data.weapon_scene
+	if character_data.weapon_data:
+		weapon_data = character_data.weapon_data
+
+	if character_data.model_scene and visual_root:
+		_load_model_from_data()
+
+	_assign_sfx_from_data()
+
+
+func _load_model_from_data() -> void:
+	for child in visual_root.get_children():
+		child.queue_free()
+
+	model_instance = character_data.model_scene.instantiate() as Node3D
+	if not model_instance:
+		return
+
+	visual_root.add_child(model_instance)
+	model_instance.transform = character_data.visual_transform
+
+	anim_player = model_instance.get_node_or_null(character_data.animation_player_path) as AnimationPlayer
+	if not anim_player:
+		anim_player = model_instance.find_child("AnimationPlayer", true, false) as AnimationPlayer
+	if anim_tree:
+		anim_tree.root_node = model_instance.get_path()
+		if anim_player:
+			anim_tree.anim_player = anim_player.get_path()
+
+
+func _assign_sfx_from_data() -> void:
+	if character_data.sfx_attack and get_node_or_null(attack_sfx_path) is AudioStreamPlayer3D:
+		var node := get_node(attack_sfx_path) as AudioStreamPlayer3D
+		node.stream = character_data.sfx_attack
+	if character_data.sfx_hurt and get_node_or_null(hurt_sfx_path) is AudioStreamPlayer3D:
+		var hurt := get_node(hurt_sfx_path) as AudioStreamPlayer3D
+		hurt.stream = character_data.sfx_hurt
+	if character_data.sfx_die and get_node_or_null(death_sfx_path) is AudioStreamPlayer3D:
+		var die_node := get_node(death_sfx_path) as AudioStreamPlayer3D
+		die_node.stream = character_data.sfx_die
+
+
+func _validate_visual_root() -> bool:
+	if not visual_root:
+		push_error("玩家 %s 缺少 VisualRoot 节点" % name)
+		return false
+	if visual_root.get_child_count() == 0 and not model_instance:
+		push_error("玩家 %s 的 VisualRoot 为空，未能加载模型 (检查 CharacterData.model_scene)" % name)
+		return false
+	if not anim_player:
+		push_error("玩家 %s 缺少 AnimationPlayer，无法驱动动画" % name)
+		return false
+	return true

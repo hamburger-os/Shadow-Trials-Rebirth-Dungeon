@@ -1,14 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://ceq7k5vymtoyf"]
+[gd_scene load_steps=6 format=3 uid="uid://ceq7k5vymtoyf"]
 
-[ext_resource type="PackedScene" uid="uid://dqyuwotmb8s6h" path="res://features/player/player.tscn" id="1_f3sb7"]
-[ext_resource type="PackedScene" uid="uid://dmnrjhqljhwoy" path="res://features/enemies/enemy.tscn" id="3_3gdo0"]
+[ext_resource type="PackedScene" path="res://features/player/player.tscn" id="1_f3sb7"]
+[ext_resource type="PackedScene" path="res://features/enemies/enemy.tscn" id="3_3gdo0"]
 [ext_resource type="PackedScene" uid="uid://b0jc2tq68aydm" path="res://features/procedural_generation/room_templates/dungeon_01.tscn" id="4_csopv"]
 [ext_resource type="Script" uid="uid://bbrp0wgbywsll" path="res://core/main.gd" id="5_55ykw"]
+[ext_resource type="Resource" path="res://data/enemies/skeleton_minion.tres" id="6_enemy_data"]
 
 [node name="世界" type="Node3D"]
 script = ExtResource("5_55ykw")
 player_path = NodePath("主角")
 enemy_scene = ExtResource("3_3gdo0")
+enemy_datas = Array[Resource]([ExtResource("6_enemy_data")])
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.8660254, -0.3535534, 0.35355335, 0, 0.7071067, 0.7071068, -0.5, -0.61237246, 0.61237234, 0, 50, 0)

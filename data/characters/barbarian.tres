@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=8 format=3 uid="uid://dpsp3ac4idue6"]
+
+[ext_resource type="Script" uid="uid://b4x0rgnyl660a" path="res://features/shared/resources/character_data.gd" id="1_wqjnh"]
+[ext_resource type="PackedScene" uid="uid://c72lcjq0sqgte" path="res://features/player/barbarian.tscn" id="2_model"]
+[ext_resource type="Script" uid="uid://0pbnqnx6v3xy" path="res://features/shared/resources/character_stats.gd" id="3_stats"]
+[ext_resource type="PackedScene" uid="uid://botaa6smopch2" path="res://features/combat/weapons/base_weapon.tscn" id="4_weapon"]
+[ext_resource type="Resource" uid="uid://ds1j1uu0lu8xb" path="res://data/items/bases/sword_2handed_color.tres" id="5_weapon_data"]
+[ext_resource type="AudioStream" uid="uid://blr2f1wgcekns" path="res://assets/audio/player/HMNBrth_Human, Adult, Male, Breath, Surprise, Gasp_UberDuo_INHL_17.wav" id="6_die"]
+
+[sub_resource type="Resource" id="CharacterStats_barbarian"]
+script = ExtResource("3_stats")
+max_health = 150
+attack_power = 20
+metadata/_custom_type_script = "uid://0pbnqnx6v3xy"
+
+[resource]
+script = ExtResource("1_wqjnh")
+model_scene = ExtResource("2_model")
+animation_player_path = NodePath("AnimationPlayer")
+weapon_socket_path = NodePath("Rig_Medium/Skeleton3D/Barbarian_BoneHandr")
+stats = SubResource("CharacterStats_barbarian")
+attack_animation_sequence = Array[StringName]([&"default/Melee_1H_Attack_Slice_Horizontal", &"default/Melee_1H_Attack_Stab"])
+sfx_die = ExtResource("6_die")
+weapon_scene = ExtResource("4_weapon")
+weapon_data = ExtResource("5_weapon_data")
